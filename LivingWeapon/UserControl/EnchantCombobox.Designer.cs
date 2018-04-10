@@ -41,7 +41,7 @@
             this.cbxSkill.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbxSkill.Name = "cbxSkill";
             this.cbxSkill.Size = new System.Drawing.Size(114, 27);
-            this.cbxSkill.TabIndex = 10;
+            this.cbxSkill.TabIndex = 2;
             // 
             // cbxEnchant
             // 
@@ -52,7 +52,7 @@
             this.cbxEnchant.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbxEnchant.Name = "cbxEnchant";
             this.cbxEnchant.Size = new System.Drawing.Size(277, 27);
-            this.cbxEnchant.TabIndex = 11;
+            this.cbxEnchant.TabIndex = 1;
             this.cbxEnchant.SelectedIndexChanged += new System.EventHandler(this.cbxEnchant_SelectedIndexChanged);
             // 
             // EnchantCombobox

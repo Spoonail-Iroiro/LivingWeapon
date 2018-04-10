@@ -40,6 +40,7 @@ namespace LivingWeapon
             SkList = new SkillLists();
 
             ETList.TrimEnchant(SigList);
+            SigList.Validate();
 
         }
 
@@ -89,6 +90,8 @@ namespace LivingWeapon
             {
                 var cells = row.Split(',');
 
+                var selectable = !cells[2].Contains("名前の巻物で選択不能");
+
                 return new Signature
                 {
                     No = int.Parse(cells[0]),
@@ -97,10 +100,50 @@ namespace LivingWeapon
                     EnchantStr = cells[3],
                     Value = int.Parse(cells[4]),
                     BloodLevel = int.Parse(cells[6]),
-                    Selectable = int.Parse(cells[6]) > 0 //BloodLevel 0 == UnSelectable
+                    Selectable = selectable//int.Parse(cells[6]) > 0 
                 };
             }).ToList();
 
+        }
+
+        bool _isValid = false;
+
+        //Noベースで銘を取得
+        public Signature GetSignature(int no)
+        {
+            if (!_isValid) throw new Exception("検証に成功していないSignatureListでNoベースアクセスがされました");
+
+            return GetSignatureNoValidate(no);
+        }
+
+        private Signature GetSignatureNoValidate(int no)
+        {
+            return SigList[no - 1];
+        }
+
+        private Signature GetSignatureForValidate(int no)
+        {
+            if (!(1 <= no && no <= SigList.Count)) return null;
+
+            return GetSignatureNoValidate(no);
+        }
+
+        //GetSignatureが正常に動作するか確認する
+        public bool Validate()
+        {
+            foreach(var sig in SigList)
+            {
+                var noBaseSelect = GetSignatureForValidate(sig.No);
+
+                if (noBaseSelect == null || sig.No != noBaseSelect.No)
+                {
+                    return false;
+                }
+            }
+
+            _isValid = true;
+
+            return true;
         }
 
         /// <summary>

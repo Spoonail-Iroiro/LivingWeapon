@@ -76,5 +76,91 @@ namespace LivingWeapon
 
             return sigs;
         }
+
+        /// <summary>
+        /// SignatureSearchCountListがすべて0（すべてのエンチャントで強度1位）のエンチャント銘セットを返します
+        /// </summary>
+        /// <returns></returns>
+        internal List<Signature> GetIdealEnchantingSignatureList()
+        {
+            var temp = SignatureSearchCountList;
+
+            //一時的に全て0に
+            SignatureSearchCountList = ManageList.Select(eSig => 0).ToList();
+
+            var rtn = GetEnchantingSignatureList();
+
+            SignatureSearchCountList = temp;
+
+            return rtn;
+        }
+        
+        //index番目のエンチャントについて、強度valueRank（0オリジン）目のエンチャント銘を返す
+        internal Signature GetEnchantingSignature(int index, int valueRank)
+        {
+            var selectedEnchantingSignature = ManageList[index].Signatures[valueRank];
+
+            return selectedEnchantingSignature;
+
+        }
+
+        //index番目のエンチャントについて、GetEnchantingSignatureListで返すvalueRankをセットする
+        internal void SetValueRank(int index, int valueRank)
+        {
+            SignatureSearchCountList[index] = valueRank;
+        }
+    }
+
+    internal class SearchingEnchant
+    {
+        internal Signature EnchantingSignature { get;  private set;}
+        //育成開始レベル
+        internal int MinLevel { get; private set; }
+        //最期のレベルアップの前レベル（育成後レベル-1）
+        internal int MaxLevel { get; private set; }
+
+        internal List<Signature> ChoiceSignatures { get; private set; }
+
+        internal SearchingEnchant(int startLevel, int goalLevel, Signature enchantingSignature)
+        {
+            EnchantingSignature = enchantingSignature;
+            MinLevel = startLevel;
+            MaxLevel = goalLevel - 1;
+
+            ChoiceSignatures = new List<Signature>();
+
+            //MinLevel～MaxLevelの各レベルについて、エンチャント銘のエンチャントに対応する選択エンチャントを決定する
+            for(var i = 0; i<(goalLevel - MinLevel); ++i)
+            {
+                var level = MinLevel + i;
+
+                var gap = (level - 1) * 10;
+
+                var gappedSigNo = EnchantingSignature.No - gap;
+
+                var choices = new List<Signature>();
+
+                choices.Add(Lists.SigList.GetSignature(gappedSigNo));
+                choices.Add(Lists.SigList.GetSignature(gappedSigNo-1));
+                choices.Add(Lists.SigList.GetSignature(gappedSigNo-2));
+
+                //選択不可銘を除外
+                choices.RemoveAll(sig => !sig.Selectable);
+
+                //選択候補銘の中で最も高い血吸いレベル
+                var maxBlood = choices.Max(sig => sig.BloodLevel);
+
+                var choice = choices.First(sig => sig.BloodLevel == maxBlood);
+
+                ChoiceSignatures.Add(choice);
+            }
+        }
+
+        internal Signature GetChoiceSignature(int level)
+        {
+            if (!(MinLevel <= level && level <= MaxLevel) ) return null;
+
+            return ChoiceSignatures[level - MinLevel];
+        }
     }
 }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LivingWeapon
 {
     class Util
     {
+        public static bool IsAppClosed { get; private set; }
+
         public static string GetEnchantInfo(Signature sig)
         {
             if (sig == null) return "情報なし\r\n";
@@ -24,6 +27,11 @@ namespace LivingWeapon
                 sigSamp.Selectable ? "" : "（選択不能）");
 
             return info;
+        }
+
+        public static void ExitApplication()
+        {
+            IsAppClosed = true;
         }
     }
 }

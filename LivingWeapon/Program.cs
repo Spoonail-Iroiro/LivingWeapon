@@ -17,9 +17,9 @@ namespace LivingWeapon
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Lists.Init(Version.Ver122, WeaponType.Melee, true);
+            //Lists.Init(Version.Ver122, WeaponType.Melee, true);
 
-            Application.Run(new Form1());
+            Application.Run(new SelectSignatureListForm());
         }
     }
 }

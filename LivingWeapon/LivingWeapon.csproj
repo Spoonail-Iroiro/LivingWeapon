@@ -24,7 +24,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -48,20 +48,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseForm.cs">
+    <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BaseForm.Designer.cs">
+    <Compile Include="Forms\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\SelectedEnchants.cs" />
-    <Compile Include="ConfirmEnchantingSignatureForm.cs">
+    <Compile Include="Forms\ConfirmEnchantingSignatureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfirmEnchantingSignatureForm.Designer.cs">
+    <Compile Include="Forms\ConfirmEnchantingSignatureForm.Designer.cs">
       <DependentUpon>ConfirmEnchantingSignatureForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DGVForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DGVForm.Designer.cs">
+      <DependentUpon>DGVForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LvEnchantingSignatureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LvEnchantingSignatureForm.Designer.cs">
+      <DependentUpon>LvEnchantingSignatureForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Forms\ShowEnchantInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowEnchantInfoForm.Designer.cs">
+      <DependentUpon>ShowEnchantInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SignatureCombinationResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SignatureCombinationResultForm.Designer.cs">
+      <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\EnchantCombobox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,16 +107,16 @@
     <Compile Include="Business\FormatExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectSignatureListForm.cs">
+    <Compile Include="Forms\SelectSignatureListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectSignatureListForm.Designer.cs">
+    <Compile Include="Forms\SelectSignatureListForm.Designer.cs">
       <DependentUpon>SelectSignatureListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SelectEnchantsForm.cs">
+    <Compile Include="Forms\SelectEnchantsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectEnchantsForm.Designer.cs">
+    <Compile Include="Forms\SelectEnchantsForm.Designer.cs">
       <DependentUpon>SelectEnchantsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TestForms\SelectSigForm.cs">
@@ -103,11 +127,23 @@
     </Compile>
     <Compile Include="Business\Signature.cs" />
     <Compile Include="Business\Util.cs" />
-    <EmbeddedResource Include="BaseForm.resx">
+    <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfirmEnchantingSignatureForm.resx">
+    <EmbeddedResource Include="Forms\ConfirmEnchantingSignatureForm.resx">
       <DependentUpon>ConfirmEnchantingSignatureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DGVForm.resx">
+      <DependentUpon>DGVForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LvEnchantingSignatureForm.resx">
+      <DependentUpon>LvEnchantingSignatureForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowEnchantInfoForm.resx">
+      <DependentUpon>ShowEnchantInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SignatureCombinationResultForm.resx">
+      <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\EnchantCombobox.resx">
       <DependentUpon>EnchantCombobox.cs</DependentUpon>
@@ -127,16 +163,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SelectSignatureListForm.resx">
+    <EmbeddedResource Include="Forms\SelectSignatureListForm.resx">
       <DependentUpon>SelectSignatureListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SelectEnchantsForm.resx">
+    <EmbeddedResource Include="Forms\SelectEnchantsForm.resx">
       <DependentUpon>SelectEnchantsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\SelectSigForm.resx">
       <DependentUpon>SelectSigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,7 +186,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
