@@ -14,8 +14,8 @@ https://whiteblackspace.hatenablog.com/entry/2018/04/11/221618
 Visual Studio 2017  
 .NET Framework 4.6.1
 
-## Licence
+## ライセンス
 MIT
 
-## Author
+## 作者
 [Spoonail](https://twitter.com/Spoonail_iroiro)
