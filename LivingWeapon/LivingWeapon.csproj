@@ -86,6 +86,12 @@
     <Compile Include="Forms\SignatureCombinationResultForm.Designer.cs">
       <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\FIxSignatureListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\FIxSignatureListForm.Designer.cs">
+      <DependentUpon>FIxSignatureListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\EnchantCombobox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SignatureCombinationResultForm.resx">
       <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\FIxSignatureListForm.resx">
+      <DependentUpon>FIxSignatureListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\EnchantCombobox.resx">
       <DependentUpon>EnchantCombobox.cs</DependentUpon>

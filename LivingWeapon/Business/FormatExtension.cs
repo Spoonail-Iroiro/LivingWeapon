@@ -17,5 +17,6 @@ namespace LivingWeapon.MyExt
         {
             return string.Join(separator, values);
         }
+
     }
 }

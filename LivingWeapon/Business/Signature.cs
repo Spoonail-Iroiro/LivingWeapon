@@ -48,6 +48,8 @@ namespace LivingWeapon
         {
             var enchantType = ETList.ETList.FirstOrDefault(et => et.IsMatch(signature));
 
+            if (enchantType == null) return null;
+
             //TODO 見つからなかった場合
 
             var skillList = SkillLists.GetSkillListOfEnchantType(enchantType);
@@ -397,7 +399,7 @@ namespace LivingWeapon
 
     }
 
-    class SkillLists
+    internal class SkillLists
     {
         //主能力
         public static List<Skill> MainParamList { get; private set; } = new List<Skill>();

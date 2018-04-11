@@ -42,7 +42,7 @@ namespace LivingWeapon
             var sfd = new SaveFileDialog();
 
             sfd.FileName = "result.csv";
-            sfd.Filter = "すべてのファイル(*.*)|*.*";
+            sfd.Filter = "csvファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
 
             try
             {

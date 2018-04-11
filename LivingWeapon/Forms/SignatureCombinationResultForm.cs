@@ -229,7 +229,7 @@ namespace LivingWeapon
             var sfd = new SaveFileDialog();
 
             sfd.FileName = "result.txt";
-            sfd.Filter = "すべてのファイル(*.*)|*.*";
+            sfd.Filter = "テキストファイル(*.txt)|*.txt|すべてのファイル(*.*)|*.*";
 
             try
             {

@@ -50,7 +50,7 @@
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnBack.Location = new System.Drawing.Point(17, 602);
+            this.btnBack.Location = new System.Drawing.Point(17, 621);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(138, 34);
             this.btnBack.TabIndex = 3;
@@ -61,7 +61,7 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnNext.Location = new System.Drawing.Point(523, 602);
+            this.btnNext.Location = new System.Drawing.Point(523, 621);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(138, 34);
             this.btnNext.TabIndex = 2;
@@ -96,7 +96,7 @@
             this.dgvSigs.AllowUserToResizeColumns = false;
             this.dgvSigs.AllowUserToResizeRows = false;
             this.dgvSigs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSigs.Location = new System.Drawing.Point(17, 195);
+            this.dgvSigs.Location = new System.Drawing.Point(17, 214);
             this.dgvSigs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvSigs.Name = "dgvSigs";
             this.dgvSigs.ReadOnly = true;
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 648);
+            this.ClientSize = new System.Drawing.Size(682, 666);
             this.Controls.Add(this.btnChangeMode);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnNext);
