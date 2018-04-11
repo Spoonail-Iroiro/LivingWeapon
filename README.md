@@ -1,7 +1,6 @@
 エンチャント選択式生き武器シミュレータ
 ====
 
-## 説明
 ↓で配布しているelonaの生き武器シミュレータのソースです。
 
 https://whiteblackspace.hatenablog.com/entry/2018/04/11/221618
