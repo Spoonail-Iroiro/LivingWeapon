@@ -44,11 +44,11 @@
             // 
             this.groupBox2.Enabled = false;
             this.groupBox2.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(12, 264);
+            this.groupBox2.Location = new System.Drawing.Point(12, 259);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(360, 106);
+            this.groupBox2.Size = new System.Drawing.Size(360, 78);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "銘リストを読み込む";
@@ -67,11 +67,10 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(360, 243);
+            this.groupBox1.Size = new System.Drawing.Size(360, 238);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "バージョンを選ぶ";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lblLoading
             // 
@@ -164,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 385);
+            this.ClientSize = new System.Drawing.Size(384, 346);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);

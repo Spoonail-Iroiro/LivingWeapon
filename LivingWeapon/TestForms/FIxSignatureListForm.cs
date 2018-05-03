@@ -11,7 +11,7 @@ using LivingWeapon.MyExt;
 
 namespace LivingWeapon
 {
-    public partial class FIxSignatureListForm : Form
+    public partial class FIxSignatureListForm : BaseForm
     {
         public FIxSignatureListForm()
         {
@@ -27,7 +27,7 @@ namespace LivingWeapon
                 new { Version = Version.Ver116fix2b, WType = WeaponType.Ranged, Feat = true },
             };
 
-            foreach(var target in targetList)
+            foreach (var target in targetList)
             {
                 Lists.Init(target.Version, target.WType, target.Feat);
 
@@ -51,7 +51,7 @@ namespace LivingWeapon
 
                 var csv = wholeText.Replace("\r", "").Trim().Split('\n').Select(row => row.Split(',')).ToList();
 
-                foreach(var row in csv)
+                foreach (var row in csv)
                 {
                     var selectable = !row[2].Contains("名前の巻物で選択不能");
 
@@ -70,20 +70,20 @@ namespace LivingWeapon
 
                     if (ench == null) continue;
 
-                    if(ench.Type.ID == 2)
+                    if (ench.Type.ID == 2)
                     {
-                        if(ench.Skill.ID == 53)
+                        if (ench.Skill.ID == 53)
                         {
                             var newValue = sig.Value * 2;
                             var star = new String('*', Math.Min(newValue / 100 + 1, 5)) + (newValue >= 500 ? "+" : "");
-                            
+
                             var enchStr = "暗黒への耐性を授ける [{0}]".Args(star);
 
                             row[3] = enchStr;
                             row[4] = newValue.ToString();
                         }
                     }
-                    
+
                 }
 
                 var writeCSV = csv.Select(row => row.JoinS(",")).JoinS("\r\n");
@@ -94,7 +94,16 @@ namespace LivingWeapon
                 }
 
             }
-          
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var llst = new LabelList(this, lblHead);
+
+            //llst.HighlightLabel(3,Color.Yellow);
         }
     }
+
+
 }

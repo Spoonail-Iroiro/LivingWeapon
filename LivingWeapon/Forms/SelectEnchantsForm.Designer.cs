@@ -28,16 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvEnchants = new System.Windows.Forms.DataGridView();
-            this.enchantTypeDiscription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.skill = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ecbEnchant = new LivingWeapon.EnchantCombobox();
-            this.btnAddAll = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudPageLimit = new System.Windows.Forms.NumericUpDown();
+            this.lblPreparing = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,129 +42,79 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nudStart = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblPreparing = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddAll = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.dgvEnchants = new System.Windows.Forms.DataGridView();
+            this.enchantTypeDiscription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.skill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnBack = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEnchants)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCopy = new System.Windows.Forms.Button();
+            this.btnUnlimit = new System.Windows.Forms.Button();
+            this.ecbEnchant = new LivingWeapon.EnchantCombobox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPageLimit)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudGoal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEnchants)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvEnchants
+            // groupBox3
             // 
-            this.dgvEnchants.AllowUserToAddRows = false;
-            this.dgvEnchants.AllowUserToDeleteRows = false;
-            this.dgvEnchants.AllowUserToResizeColumns = false;
-            this.dgvEnchants.AllowUserToResizeRows = false;
-            this.dgvEnchants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEnchants.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.enchantTypeDiscription,
-            this.skill});
-            this.dgvEnchants.Location = new System.Drawing.Point(321, 12);
-            this.dgvEnchants.MultiSelect = false;
-            this.dgvEnchants.Name = "dgvEnchants";
-            this.dgvEnchants.ReadOnly = true;
-            this.dgvEnchants.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dgvEnchants.RowTemplate.Height = 24;
-            this.dgvEnchants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEnchants.Size = new System.Drawing.Size(433, 401);
-            this.dgvEnchants.TabIndex = 1;
-            this.dgvEnchants.TabStop = false;
-            this.dgvEnchants.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvEnchants_RowsChanged);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.nudPageLimit);
+            this.groupBox3.Controls.Add(this.btnUnlimit);
+            this.groupBox3.Location = new System.Drawing.Point(19, 419);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(288, 74);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "ページ制限";
             // 
-            // enchantTypeDiscription
+            // label7
             // 
-            this.enchantTypeDiscription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.enchantTypeDiscription.DataPropertyName = "TypeStr";
-            this.enchantTypeDiscription.HeaderText = "エンチャント";
-            this.enchantTypeDiscription.Name = "enchantTypeDiscription";
-            this.enchantTypeDiscription.ReadOnly = true;
-            this.enchantTypeDiscription.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.enchantTypeDiscription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.enchantTypeDiscription.Width = 81;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(114, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 19);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "ページまで";
             // 
-            // skill
+            // nudPageLimit
             // 
-            this.skill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.skill.DataPropertyName = "SkillStr";
-            this.skill.HeaderText = "　";
-            this.skill.Name = "skill";
-            this.skill.ReadOnly = true;
-            this.skill.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.skill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nudPageLimit.Location = new System.Drawing.Point(11, 28);
+            this.nudPageLimit.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudPageLimit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPageLimit.Name = "nudPageLimit";
+            this.nudPageLimit.Size = new System.Drawing.Size(98, 27);
+            this.nudPageLimit.TabIndex = 10;
+            this.nudPageLimit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // groupBox1
+            // lblPreparing
             // 
-            this.groupBox1.Controls.Add(this.ecbEnchant);
-            this.groupBox1.Controls.Add(this.btnAddAll);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(302, 144);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "新規";
-            // 
-            // ecbEnchant
-            // 
-            this.ecbEnchant.Font = new System.Drawing.Font("Meiryo UI", 9F);
-            this.ecbEnchant.Location = new System.Drawing.Point(7, 26);
-            this.ecbEnchant.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ecbEnchant.Name = "ecbEnchant";
-            this.ecbEnchant.Size = new System.Drawing.Size(288, 61);
-            this.ecbEnchant.TabIndex = 1;
-            // 
-            // btnAddAll
-            // 
-            this.btnAddAll.Location = new System.Drawing.Point(98, 93);
-            this.btnAddAll.Name = "btnAddAll";
-            this.btnAddAll.Size = new System.Drawing.Size(119, 34);
-            this.btnAddAll.TabIndex = 3;
-            this.btnAddAll.Text = ">>全部追加";
-            this.btnAddAll.UseVisualStyleBackColor = true;
-            this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(7, 93);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(85, 34);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = ">追加";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Location = new System.Drawing.Point(19, 162);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(138, 34);
-            this.btnCopy.TabIndex = 4;
-            this.btnCopy.Text = "コピー";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(19, 202);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(138, 34);
-            this.btnDelete.TabIndex = 5;
-            this.btnDelete.Text = "削除";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnNext.Location = new System.Drawing.Point(616, 419);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(138, 34);
-            this.btnNext.TabIndex = 8;
-            this.btnNext.Text = "次へ";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            this.lblPreparing.AutoSize = true;
+            this.lblPreparing.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.lblPreparing.Location = new System.Drawing.Point(464, 510);
+            this.lblPreparing.Name = "lblPreparing";
+            this.lblPreparing.Size = new System.Drawing.Size(0, 25);
+            this.lblPreparing.TabIndex = 9;
             // 
             // groupBox2
             // 
@@ -198,7 +142,6 @@
             this.label5.Size = new System.Drawing.Size(24, 19);
             this.label5.TabIndex = 9;
             this.label5.Text = "Lv";
-            this.label5.Click += new System.EventHandler(this.label4_Click);
             // 
             // label4
             // 
@@ -208,7 +151,6 @@
             this.label4.Size = new System.Drawing.Size(24, 19);
             this.label4.TabIndex = 9;
             this.label4.Text = "Lv";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // nudGoal
             // 
@@ -241,7 +183,6 @@
             this.label3.Size = new System.Drawing.Size(24, 19);
             this.label3.TabIndex = 7;
             this.label3.Text = "↓";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblEnchantCount
             // 
@@ -302,19 +243,85 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "育成開始：";
             // 
-            // lblPreparing
+            // groupBox1
             // 
-            this.lblPreparing.AutoSize = true;
-            this.lblPreparing.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblPreparing.Location = new System.Drawing.Point(441, 424);
-            this.lblPreparing.Name = "lblPreparing";
-            this.lblPreparing.Size = new System.Drawing.Size(0, 25);
-            this.lblPreparing.TabIndex = 9;
+            this.groupBox1.Controls.Add(this.ecbEnchant);
+            this.groupBox1.Controls.Add(this.btnAddAll);
+            this.groupBox1.Controls.Add(this.btnAdd);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(302, 144);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "新規";
+            // 
+            // btnAddAll
+            // 
+            this.btnAddAll.Location = new System.Drawing.Point(98, 93);
+            this.btnAddAll.Name = "btnAddAll";
+            this.btnAddAll.Size = new System.Drawing.Size(119, 34);
+            this.btnAddAll.TabIndex = 3;
+            this.btnAddAll.Text = ">>全部追加";
+            this.btnAddAll.UseVisualStyleBackColor = true;
+            this.btnAddAll.Click += new System.EventHandler(this.btnAddAll_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(7, 93);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(85, 34);
+            this.btnAdd.TabIndex = 2;
+            this.btnAdd.Text = ">追加";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // dgvEnchants
+            // 
+            this.dgvEnchants.AllowUserToAddRows = false;
+            this.dgvEnchants.AllowUserToDeleteRows = false;
+            this.dgvEnchants.AllowUserToResizeColumns = false;
+            this.dgvEnchants.AllowUserToResizeRows = false;
+            this.dgvEnchants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEnchants.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.enchantTypeDiscription,
+            this.skill});
+            this.dgvEnchants.Location = new System.Drawing.Point(321, 12);
+            this.dgvEnchants.MultiSelect = false;
+            this.dgvEnchants.Name = "dgvEnchants";
+            this.dgvEnchants.ReadOnly = true;
+            this.dgvEnchants.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dgvEnchants.RowTemplate.Height = 24;
+            this.dgvEnchants.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEnchants.Size = new System.Drawing.Size(433, 481);
+            this.dgvEnchants.TabIndex = 1;
+            this.dgvEnchants.TabStop = false;
+            this.dgvEnchants.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvEnchants_RowsChanged);
+            // 
+            // enchantTypeDiscription
+            // 
+            this.enchantTypeDiscription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.enchantTypeDiscription.DataPropertyName = "TypeStr";
+            this.enchantTypeDiscription.HeaderText = "エンチャント";
+            this.enchantTypeDiscription.Name = "enchantTypeDiscription";
+            this.enchantTypeDiscription.ReadOnly = true;
+            this.enchantTypeDiscription.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.enchantTypeDiscription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.enchantTypeDiscription.Width = 81;
+            // 
+            // skill
+            // 
+            this.skill.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.skill.DataPropertyName = "SkillStr";
+            this.skill.HeaderText = "　";
+            this.skill.Name = "skill";
+            this.skill.ReadOnly = true;
+            this.skill.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.skill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnBack.Location = new System.Drawing.Point(19, 419);
+            this.btnBack.Location = new System.Drawing.Point(19, 505);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(138, 34);
             this.btnBack.TabIndex = 8;
@@ -322,15 +329,78 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnNext.Location = new System.Drawing.Point(616, 505);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(138, 34);
+            this.btnNext.TabIndex = 8;
+            this.btnNext.Text = "次へ";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(19, 202);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(138, 34);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "削除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(19, 162);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(138, 34);
+            this.btnCopy.TabIndex = 4;
+            this.btnCopy.Text = "コピー";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // btnUnlimit
+            // 
+            this.btnUnlimit.Location = new System.Drawing.Point(188, 22);
+            this.btnUnlimit.Name = "btnUnlimit";
+            this.btnUnlimit.Size = new System.Drawing.Size(85, 34);
+            this.btnUnlimit.TabIndex = 2;
+            this.btnUnlimit.Text = "制限なし";
+            this.btnUnlimit.UseVisualStyleBackColor = true;
+            this.btnUnlimit.Click += new System.EventHandler(this.btnUnlimit_Click);
+            // 
+            // ecbEnchant
+            // 
+            this.ecbEnchant.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.ecbEnchant.Location = new System.Drawing.Point(7, 26);
+            this.ecbEnchant.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ecbEnchant.Name = "ecbEnchant";
+            this.ecbEnchant.Size = new System.Drawing.Size(288, 61);
+            this.ecbEnchant.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.button1.Location = new System.Drawing.Point(176, 505);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 34);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "名前の巻物";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SelectEnchantsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 461);
+            this.ClientSize = new System.Drawing.Size(766, 551);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblPreparing);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvEnchants);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnDelete);
@@ -338,12 +408,15 @@
             this.Name = "SelectEnchantsForm";
             this.Text = "エンチャント選択";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SelectEnchantsForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEnchants)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPageLimit)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudGoal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudStart)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEnchants)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -372,5 +445,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblPreparing;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nudPageLimit;
+        private System.Windows.Forms.Button btnUnlimit;
+        private System.Windows.Forms.Button button1;
     }
 }

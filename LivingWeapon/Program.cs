@@ -19,7 +19,10 @@ namespace LivingWeapon
 
             //Lists.Init(Version.Ver122, WeaponType.Melee, true);
 
-            Application.Run(new SelectSignatureListForm());
+            //var form = new FIxSignatureListForm();
+            var form = new SelectSignatureListForm();
+
+            Application.Run(form);
         }
     }
 }

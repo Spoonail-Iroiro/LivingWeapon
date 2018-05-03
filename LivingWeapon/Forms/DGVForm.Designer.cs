@@ -29,11 +29,32 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dgvMain = new System.Windows.Forms.DataGridView();
-            this.btnSaveAsCSV = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSaveAsCSV = new System.Windows.Forms.Button();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 25);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "結果（表形式）";
+            // 
+            // btnSaveAsCSV
+            // 
+            this.btnSaveAsCSV.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnSaveAsCSV.Location = new System.Drawing.Point(17, 440);
+            this.btnSaveAsCSV.Name = "btnSaveAsCSV";
+            this.btnSaveAsCSV.Size = new System.Drawing.Size(169, 34);
+            this.btnSaveAsCSV.TabIndex = 2;
+            this.btnSaveAsCSV.Text = "csvファイル保存";
+            this.btnSaveAsCSV.UseVisualStyleBackColor = true;
+            this.btnSaveAsCSV.Click += new System.EventHandler(this.btnSaveAsCSV_Click);
             // 
             // dgvMain
             // 
@@ -58,35 +79,15 @@
             this.dgvMain.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvMain.RowTemplate.Height = 24;
             this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMain.Size = new System.Drawing.Size(832, 395);
+            this.dgvMain.Size = new System.Drawing.Size(883, 395);
             this.dgvMain.TabIndex = 1;
-            // 
-            // btnSaveAsCSV
-            // 
-            this.btnSaveAsCSV.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnSaveAsCSV.Location = new System.Drawing.Point(17, 440);
-            this.btnSaveAsCSV.Name = "btnSaveAsCSV";
-            this.btnSaveAsCSV.Size = new System.Drawing.Size(169, 34);
-            this.btnSaveAsCSV.TabIndex = 2;
-            this.btnSaveAsCSV.Text = "csvファイル保存";
-            this.btnSaveAsCSV.UseVisualStyleBackColor = true;
-            this.btnSaveAsCSV.Click += new System.EventHandler(this.btnSaveAsCSV_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 25);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "結果（表形式）";
+            this.dgvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellContentClick);
             // 
             // DGVForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 486);
+            this.ClientSize = new System.Drawing.Size(912, 486);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSaveAsCSV);
             this.Controls.Add(this.dgvMain);

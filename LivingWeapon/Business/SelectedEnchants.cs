@@ -13,11 +13,11 @@ namespace LivingWeapon
             public Enchant Enchant { get; private set; }
             public List<Signature> Signatures { get; private set; }
 
-            internal EnchantAndSignatures(Enchant enchant)
+            internal EnchantAndSignatures(Enchant enchant, int pageLimit)
             {
                 Enchant = enchant;
 
-                Signatures = Lists.SigList.SearchByEnchant(enchant).ToList();
+                Signatures = Lists.SigList.SearchByEnchant(enchant, pageLimit).ToList();
             }
         }
 
@@ -39,9 +39,9 @@ namespace LivingWeapon
             SignatureSearchCountList = new List<int>();
         }
 
-        internal bool Add(Enchant enchant)
+        internal bool Add(Enchant enchant, int pageLimit)
         {
-            var enchSig = new EnchantAndSignatures(enchant);
+            var enchSig = new EnchantAndSignatures(enchant, pageLimit);
 
             if(enchSig.Signatures.Count == 0)
             {

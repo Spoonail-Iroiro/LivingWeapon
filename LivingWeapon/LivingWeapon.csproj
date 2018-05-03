@@ -67,11 +67,23 @@
     <Compile Include="Forms\DGVForm.Designer.cs">
       <DependentUpon>DGVForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sub\InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sub\InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LvEnchantingSignatureForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\LvEnchantingSignatureForm.Designer.cs">
       <DependentUpon>LvEnchantingSignatureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScrollOfNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScrollOfNameForm.Designer.cs">
+      <DependentUpon>ScrollOfNameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Forms\ShowEnchantInfoForm.cs">
@@ -133,6 +145,7 @@
     </Compile>
     <Compile Include="Business\Signature.cs" />
     <Compile Include="Business\Util.cs" />
+    <Compile Include="UserControl\LabelList.cs" />
     <EmbeddedResource Include="Forms\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,11 +158,17 @@
     <EmbeddedResource Include="Forms\LvEnchantingSignatureForm.resx">
       <DependentUpon>LvEnchantingSignatureForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScrollOfNameForm.resx">
+      <DependentUpon>ScrollOfNameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShowEnchantInfoForm.resx">
       <DependentUpon>ShowEnchantInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SignatureCombinationResultForm.resx">
       <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sub\InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\FIxSignatureListForm.resx">
       <DependentUpon>FIxSignatureListForm.cs</DependentUpon>

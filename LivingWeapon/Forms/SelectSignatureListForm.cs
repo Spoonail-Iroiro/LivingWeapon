@@ -17,17 +17,7 @@ namespace LivingWeapon
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
+        private bool LoadSignatureList()
         {
             var tmp = lblLoading.Text;
 
@@ -71,29 +61,37 @@ namespace LivingWeapon
                 {
                     MessageBox.Show("銘リストファイルが見つかりませんでした。\r\n※ver1.22のフィート無し銘リストはありません");
 
-                    return;
+                    return false;
                 }
-
-                var form = new SelectEnchantsForm();
-
-
-                this.Hide();
-
-                form.ShowDialog();
-
-                if (Util.IsAppClosed)
-                {
-                    Close();
-                    return;
-                }
-
-                this.Show();
 
             }
             finally
             {
                 lblLoading.Text = tmp;
             }
+
+            return true;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            var success = LoadSignatureList();
+
+            if (!success) return;
+
+            var form = new SelectEnchantsForm();
+
+            this.Hide();
+
+            form.ShowDialog();
+
+            if (Util.IsAppClosed)
+            {
+                Close();
+                return;
+            }
+
+            this.Show();
 
         }
 
@@ -106,5 +104,7 @@ namespace LivingWeapon
         {
 
         }
+
+
     }
 }

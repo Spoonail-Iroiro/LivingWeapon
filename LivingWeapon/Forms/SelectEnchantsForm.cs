@@ -15,6 +15,7 @@ namespace LivingWeapon
     {
         List<Enchant> _table;
         BindingSource _bs;
+        Form _nsForm;
 
         public SelectEnchantsForm()
         {
@@ -23,18 +24,31 @@ namespace LivingWeapon
             ecbEnchant.cbxEnchantSelectedIndexChanged += ecbEnchant_cbxEnchantSelectedIndexChanged;
 
             _table = new List<Enchant>();
-           
+
             dgvEnchants.AutoGenerateColumns = false;
 
             _bs = new BindingSource(_table, "");
 
             dgvEnchants.DataSource = _bs;
+
+            nudPageLimit.Value = Lists.SigList.SigList.Last().Page;
+
+            _nsForm = new InputDialog();
+
+            AddOwnedForm(_nsForm);
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ReloadTable()
         {
+            _table = _table.OrderBy(ench => ench.Type.ID).ThenBy(ench => ench.Skill.ID).ToList();
 
+            _bs.DataSource = _table;
+
+            _bs.ResetBindings(true);
         }
+
+        #region イベントハンドラ
 
         private void ecbEnchant_cbxEnchantSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -52,15 +66,6 @@ namespace LivingWeapon
             ReloadTable();
         }
 
-        private void dgvEnchants_RowsChanged(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            //DataGridView1の行ヘッダーに行番号を表示する
-            for (int i = 0; i < dgvEnchants.Rows.Count; i++)
-            {
-                dgvEnchants.Rows[i].HeaderCell.Value = (i+1).ToString();
-            }
-        }
-
         private void btnAddAll_Click(object sender, EventArgs e)
         {
             var enchants = ecbEnchant.GetAllEnchants();
@@ -70,13 +75,13 @@ namespace LivingWeapon
             ReloadTable();
         }
 
-        private void ReloadTable()
+        private void dgvEnchants_RowsChanged(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            _table = _table.OrderBy(ench => ench.Type.ID).ThenBy(ench => ench.Skill.ID).ToList();
-
-            _bs.DataSource = _table;
-
-            _bs.ResetBindings(true);
+            //DataGridView1の行ヘッダーに行番号を表示する
+            for (int i = 0; i < dgvEnchants.Rows.Count; i++)
+            {
+                dgvEnchants.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -99,16 +104,6 @@ namespace LivingWeapon
             _table.Add(_table[selectedIndex]);
 
             ReloadTable();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void nudStart_ValueChanged(object sender, EventArgs e)
@@ -153,7 +148,7 @@ namespace LivingWeapon
 
                 foreach (var enchant in _table)
                 {
-                    selectedEnchants.Add(enchant);
+                    selectedEnchants.Add(enchant, (int)nudPageLimit.Value);
                 }
 
                 var form = new ConfirmEnchantingSignatureForm(this, (int)nudStart.Value, (int)nudGoal.Value, selectedEnchants);
@@ -180,19 +175,36 @@ namespace LivingWeapon
             //var result = _table.Select(ench => Lists.SigList.SearchByEnchant(ench)).ToList();
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            _backFlag = true;
+
+            Close();
+        }
+
+
         private void SelectEnchantsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!_backFlag)
             {
                 Util.ExitApplication();
             }
+
+            _nsForm.Close();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            _backFlag = true;
+        #endregion
 
-            Close();
+        private void btnUnlimit_Click(object sender, EventArgs e)
+        {
+            nudPageLimit.Value = Lists.SigList.SigList.Last().Page;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _nsForm.Show();
+            _nsForm.WindowState = FormWindowState.Normal;
+            _nsForm.Activate();
         }
     }
 }

@@ -14,6 +14,8 @@ namespace LivingWeapon
 {
     public partial class DGVForm : BaseForm
     {
+        Form _snForm;
+
         public DGVForm()
         {
             InitializeComponent();
@@ -22,6 +24,14 @@ namespace LivingWeapon
         public DGVForm(DataTable table) : this()
         {
             dgvMain.DataSource = table;
+
+            var buttonColumn = new DataGridViewButtonColumn();
+            buttonColumn.Name = "ScrollOfName";
+            buttonColumn.UseColumnTextForButtonValue = true;
+            buttonColumn.Text = "名前の巻物";
+            buttonColumn.HeaderText = "名前の巻物";
+
+            dgvMain.Columns.Add(buttonColumn);
         }
 
         private void btnSaveAsCSV_Click(object sender, EventArgs e)
@@ -30,7 +40,7 @@ namespace LivingWeapon
 
             var header = new List<string>();
 
-            foreach(DataColumn column in table.Columns)
+            foreach (DataColumn column in table.Columns)
             {
                 header.Add(column.ColumnName);
             }
@@ -67,9 +77,42 @@ namespace LivingWeapon
 
         private void DGVForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_snForm != null)
+            {
+                _snForm.Close();
+            }
+
             e.Cancel = true;
 
             this.Hide();
+        }
+
+        private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvMain.Columns[e.ColumnIndex].Name == "ScrollOfName")
+            {
+                var table = (DataTable)dgvMain.DataSource;
+
+                var no = table.Rows[e.RowIndex].Field<int>(2);
+
+                var targetSig = Lists.SigList.SigList.First(sig => sig.No == no);
+
+                if (_snForm != null)
+                {
+                    _snForm.Close();
+                }
+
+                _snForm = new ScrollOfNameForm(targetSig);
+
+                _snForm.StartPosition = FormStartPosition.Manual;
+
+                _snForm.Left = this.Left + this.Width;
+                _snForm.Top = this.Top;
+
+                _snForm.Show();
+
+
+            }
         }
     }
 }

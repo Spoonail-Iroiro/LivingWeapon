@@ -123,7 +123,7 @@ namespace LivingWeapon
             return SigList[no - 1];
         }
 
-        private Signature GetSignatureForValidate(int no)
+        public Signature GetSignatureOrNull(int no)
         {
             if (!(1 <= no && no <= SigList.Count)) return null;
 
@@ -135,7 +135,7 @@ namespace LivingWeapon
         {
             foreach(var sig in SigList)
             {
-                var noBaseSelect = GetSignatureForValidate(sig.No);
+                var noBaseSelect = GetSignatureOrNull(sig.No);
 
                 if (noBaseSelect == null || sig.No != noBaseSelect.No)
                 {
@@ -150,26 +150,20 @@ namespace LivingWeapon
 
         /// <summary>
         /// メイン処理用の検索（レベル上昇によるズレを考慮しリスト頭140のエンチャント銘は検索しない、探索するのは上位10エンチャまで）
+        /// 指定エンチャントで銘リスト（頭listSkip個を除外）をpageLimitページまでで検索し、該当するエンチャント銘の強度順（強度が同じ場合No順）にsearchTake個返します。
         /// </summary>
         /// <param name="enchant"></param>
         /// <returns></returns>
-        public IEnumerable<Signature> SearchByEnchant(Enchant enchant)
+        public IEnumerable<Signature> SearchByEnchant(Enchant enchant, int pageLimit)
         {
-            return SearchByEnchant(enchant, 140, 10);
-        }
+            var listSkip = 140;
+            var searchTake = 10;
 
-        /// <summary>
-        /// 指定エンチャントで銘リスト（頭listSkip個を除外）を検索し、該当するエンチャント銘の強度順（強度が同じ場合No順）にsearchTake個返します。
-        /// </summary>
-        /// <param name="enchant">検索エンチャント</param>
-        /// <param name="listSkip">検索対象から外す数</param>
-        /// <param name="searchTake">検索結果の上位何個を取得するか</param>
-        /// <returns></returns>
-        private IEnumerable<Signature> SearchByEnchant(Enchant enchant, int listSkip, int searchTake)
-        {
-            var eType = enchant.Type; 
+            var eType = enchant.Type;
 
-            var sigs = SigList.Skip(listSkip).Where(sig => eType.IsMatch(sig));
+            var searchSigList = SigList.Take(17*pageLimit-1);
+
+            var sigs = searchSigList.Skip(listSkip).Where(sig => eType.IsMatch(sig));
 
             if (enchant.HasSkill)
             {
@@ -182,6 +176,7 @@ namespace LivingWeapon
 
             return sigs;
         }
+
     }
 
     //銘リスト1行に対応するクラス
