@@ -10,7 +10,8 @@ namespace LivingWeapon
     enum Version
     {
         Ver116fix2b,
-        Ver122
+        Ver122,
+        OO
     }
 
     enum WeaponType
@@ -25,7 +26,9 @@ namespace LivingWeapon
         public static EnchantTypeList ETList { get; set; }
         public static SkillLists SkList { get; set; }
 
+        
         public static bool ListLoaded { get { return ETList != null; } }
+        public static Version SelectedVersion { get; private set; }
 
         /// <summary>
         /// エンチャントリストを読み込み各種リストクラスを初期化します。
@@ -41,6 +44,7 @@ namespace LivingWeapon
 
             ETList.TrimEnchant(SigList);
             SigList.Validate();
+            SelectedVersion = version;
 
         }
 
@@ -69,11 +73,11 @@ namespace LivingWeapon
 
         public SignatureList(Version version, WeaponType wtype, bool feated)
         {
-            var ver = version == Version.Ver116fix2b ? "1.16fix2b" : "1.22";
+            var ver = version == Version.Ver116fix2b ? "1.16fix2b" : (version == Version.Ver122 ? "1.22" : "oo");
             var weapon = wtype == WeaponType.Melee ? "Melee" : "Ranged";
             var feat = feated ? "Feat" : "NoFeat";
 
-            var filename = string.Join("_", ver, weapon, feat) + ".csv";
+            var filename = string.Join("_", ver, weapon, feat) + (version == Version.OO ? "_170000" : "") + ".csv";
 
             var filepath = System.IO.Path.Combine("./Data/EnchantList", filename);
 
@@ -92,7 +96,7 @@ namespace LivingWeapon
             {
                 var cells = row.Split(',');
 
-                var selectable = !cells[2].Contains("名前の巻物で選択不能");
+                var selectable = !cells[2].Contains("名前の巻物で選択不能") && !cells[2].Contains("選択不可");
 
                 return new Signature
                 {

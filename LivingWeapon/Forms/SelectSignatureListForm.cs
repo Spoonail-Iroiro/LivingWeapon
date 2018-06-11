@@ -48,6 +48,18 @@ namespace LivingWeapon
                     wType = WeaponType.Ranged;
 
                 }
+                else if (rdb5.Checked)
+                {
+                    version = Version.OO;
+                    wType = WeaponType.Melee;
+
+                }
+                else if (rdb6.Checked)
+                {
+                    version = Version.OO;
+                    wType = WeaponType.Ranged;
+
+                }
 
                 lblLoading.Text = "読み込み中…";
 
@@ -59,7 +71,7 @@ namespace LivingWeapon
                 }
                 catch
                 {
-                    MessageBox.Show("銘リストファイルが見つかりませんでした。\r\n※ver1.22のフィート無し銘リストはありません");
+                    MessageBox.Show("銘リストファイルが見つかりませんでした。\r\n※ver1.22, ooのフィート無し銘リストはありません");
 
                     return false;
                 }

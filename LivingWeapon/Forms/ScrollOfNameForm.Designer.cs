@@ -28,6 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lblLastPage = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblGoalPage = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblEnchName = new System.Windows.Forms.Label();
+            this.lblSearchTarget = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtPage = new System.Windows.Forms.TextBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnPageNext = new System.Windows.Forms.Button();
@@ -38,16 +47,98 @@
             this.lblPageCountAll = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNameList = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblGoalPage = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblLastPage = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblEnchName = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblSearchTarget = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // lblLastPage
+            // 
+            this.lblLastPage.AutoSize = true;
+            this.lblLastPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.lblLastPage.Location = new System.Drawing.Point(74, 604);
+            this.lblLastPage.Name = "lblLastPage";
+            this.lblLastPage.Size = new System.Drawing.Size(84, 25);
+            this.lblLastPage.TabIndex = 4;
+            this.lblLastPage.Text = "100000";
+            this.lblLastPage.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.label7.Location = new System.Drawing.Point(164, 575);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 25);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "ページ";
+            // 
+            // lblGoalPage
+            // 
+            this.lblGoalPage.AutoSize = true;
+            this.lblGoalPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.lblGoalPage.Location = new System.Drawing.Point(74, 575);
+            this.lblGoalPage.Name = "lblGoalPage";
+            this.lblGoalPage.Size = new System.Drawing.Size(84, 25);
+            this.lblGoalPage.TabIndex = 4;
+            this.lblGoalPage.Text = "100000";
+            this.lblGoalPage.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.label6.Location = new System.Drawing.Point(164, 604);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(102, 25);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "ページめくる";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.label2.Location = new System.Drawing.Point(27, 604);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 25);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "あと";
+            // 
+            // lblEnchName
+            // 
+            this.lblEnchName.AutoSize = true;
+            this.lblEnchName.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.lblEnchName.Location = new System.Drawing.Point(212, 575);
+            this.lblEnchName.Name = "lblEnchName";
+            this.lblEnchName.Size = new System.Drawing.Size(0, 25);
+            this.lblEnchName.TabIndex = 4;
+            this.lblEnchName.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // lblSearchTarget
+            // 
+            this.lblSearchTarget.AutoSize = true;
+            this.lblSearchTarget.Font = new System.Drawing.Font("Meiryo UI", 10F);
+            this.lblSearchTarget.Location = new System.Drawing.Point(100, 85);
+            this.lblSearchTarget.Name = "lblSearchTarget";
+            this.lblSearchTarget.Size = new System.Drawing.Size(0, 22);
+            this.lblSearchTarget.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Meiryo UI", 10F);
+            this.label5.Location = new System.Drawing.Point(13, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 22);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "検索結果：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.label4.Location = new System.Drawing.Point(12, 575);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 25);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "目標：";
             // 
             // txtPage
             // 
@@ -107,7 +198,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 15);
+            this.label3.Location = new System.Drawing.Point(282, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 19);
             this.label3.TabIndex = 0;
@@ -118,9 +209,9 @@
             this.lblPageCountAll.AutoSize = true;
             this.lblPageCountAll.Location = new System.Drawing.Point(213, 15);
             this.lblPageCountAll.Name = "lblPageCountAll";
-            this.lblPageCountAll.Size = new System.Drawing.Size(45, 19);
+            this.lblPageCountAll.Size = new System.Drawing.Size(63, 19);
             this.lblPageCountAll.TabIndex = 0;
-            this.lblPageCountAll.Text = "0000";
+            this.lblPageCountAll.Text = "000000";
             // 
             // label1
             // 
@@ -140,95 +231,6 @@
             this.lblNameList.Size = new System.Drawing.Size(69, 20);
             this.lblNameList.TabIndex = 0;
             this.lblNameList.Text = "label1";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.label4.Location = new System.Drawing.Point(12, 575);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 25);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "目標：";
-            // 
-            // lblGoalPage
-            // 
-            this.lblGoalPage.AutoSize = true;
-            this.lblGoalPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblGoalPage.Location = new System.Drawing.Point(74, 575);
-            this.lblGoalPage.Name = "lblGoalPage";
-            this.lblGoalPage.Size = new System.Drawing.Size(60, 25);
-            this.lblGoalPage.TabIndex = 4;
-            this.lblGoalPage.Text = "0000";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.label2.Location = new System.Drawing.Point(27, 604);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 25);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "あと";
-            // 
-            // lblLastPage
-            // 
-            this.lblLastPage.AutoSize = true;
-            this.lblLastPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblLastPage.Location = new System.Drawing.Point(74, 604);
-            this.lblLastPage.Name = "lblLastPage";
-            this.lblLastPage.Size = new System.Drawing.Size(60, 25);
-            this.lblLastPage.TabIndex = 4;
-            this.lblLastPage.Text = "0000";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.label6.Location = new System.Drawing.Point(130, 604);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 25);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "ページめくる";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.label7.Location = new System.Drawing.Point(130, 575);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 25);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "ページ";
-            // 
-            // lblEnchName
-            // 
-            this.lblEnchName.AutoSize = true;
-            this.lblEnchName.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblEnchName.Location = new System.Drawing.Point(212, 575);
-            this.lblEnchName.Name = "lblEnchName";
-            this.lblEnchName.Size = new System.Drawing.Size(0, 25);
-            this.lblEnchName.TabIndex = 4;
-            this.lblEnchName.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Meiryo UI", 10F);
-            this.label5.Location = new System.Drawing.Point(13, 85);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 22);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "検索結果：";
-            // 
-            // lblSearchTarget
-            // 
-            this.lblSearchTarget.AutoSize = true;
-            this.lblSearchTarget.Font = new System.Drawing.Font("Meiryo UI", 10F);
-            this.lblSearchTarget.Location = new System.Drawing.Point(100, 85);
-            this.lblSearchTarget.Name = "lblSearchTarget";
-            this.lblSearchTarget.Size = new System.Drawing.Size(0, 22);
-            this.lblSearchTarget.TabIndex = 4;
             // 
             // ScrollOfNameForm
             // 

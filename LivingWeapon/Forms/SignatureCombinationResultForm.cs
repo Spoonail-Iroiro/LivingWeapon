@@ -122,7 +122,7 @@ namespace LivingWeapon
             table.Columns.Add(new DataColumn("銘", typeof(string)));
             table.Columns.Add(new DataColumn("選択するエンチャント", typeof(string)));
             table.Columns.Add(new DataColumn("強度", typeof(int)));
-            table.Columns.Add(new DataColumn("血吸レベル", typeof(int)));
+            table.Columns.Add(new DataColumn("血吸", typeof(int)));
 
             var rows = result.Select((sEnch, index) =>
             {

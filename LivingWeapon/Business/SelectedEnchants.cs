@@ -140,9 +140,24 @@ namespace LivingWeapon
 
                 var choices = new List<Signature>();
 
-                choices.Add(Lists.SigList.GetSignature(gappedSigNo));
-                choices.Add(Lists.SigList.GetSignature(gappedSigNo-1));
-                choices.Add(Lists.SigList.GetSignature(gappedSigNo-2));
+                if(Lists.SelectedVersion == Version.OO)
+                {
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 1));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 2));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 3));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 4));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 5));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 6));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 7));
+                }
+                else
+                {
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 1));
+                    choices.Add(Lists.SigList.GetSignature(gappedSigNo - 2));
+                }
+
 
                 //選択不可銘を除外
                 choices.RemoveAll(sig => !sig.Selectable);

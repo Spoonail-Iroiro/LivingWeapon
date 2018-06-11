@@ -31,6 +31,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.nudPageLimit = new System.Windows.Forms.NumericUpDown();
+            this.btnUnlimit = new System.Windows.Forms.Button();
             this.lblPreparing = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,13 +49,12 @@
             this.dgvEnchants = new System.Windows.Forms.DataGridView();
             this.enchantTypeDiscription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skill = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
-            this.btnUnlimit = new System.Windows.Forms.Button();
             this.ecbEnchant = new LivingWeapon.EnchantCombobox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPageLimit)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -89,23 +89,23 @@
             // 
             this.nudPageLimit.Location = new System.Drawing.Point(11, 28);
             this.nudPageLimit.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.nudPageLimit.Minimum = new decimal(new int[] {
-            1,
+            2000000000,
             0,
             0,
             0});
             this.nudPageLimit.Name = "nudPageLimit";
             this.nudPageLimit.Size = new System.Drawing.Size(98, 27);
             this.nudPageLimit.TabIndex = 10;
-            this.nudPageLimit.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            // 
+            // btnUnlimit
+            // 
+            this.btnUnlimit.Location = new System.Drawing.Point(188, 22);
+            this.btnUnlimit.Name = "btnUnlimit";
+            this.btnUnlimit.Size = new System.Drawing.Size(85, 34);
+            this.btnUnlimit.TabIndex = 2;
+            this.btnUnlimit.Text = "制限なし";
+            this.btnUnlimit.UseVisualStyleBackColor = true;
+            this.btnUnlimit.Click += new System.EventHandler(this.btnUnlimit_Click);
             // 
             // lblPreparing
             // 
@@ -318,6 +318,17 @@
             this.skill.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.skill.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.button1.Location = new System.Drawing.Point(176, 505);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 34);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "名前の巻物";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
@@ -360,16 +371,6 @@
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
-            // btnUnlimit
-            // 
-            this.btnUnlimit.Location = new System.Drawing.Point(188, 22);
-            this.btnUnlimit.Name = "btnUnlimit";
-            this.btnUnlimit.Size = new System.Drawing.Size(85, 34);
-            this.btnUnlimit.TabIndex = 2;
-            this.btnUnlimit.Text = "制限なし";
-            this.btnUnlimit.UseVisualStyleBackColor = true;
-            this.btnUnlimit.Click += new System.EventHandler(this.btnUnlimit_Click);
-            // 
             // ecbEnchant
             // 
             this.ecbEnchant.Font = new System.Drawing.Font("Meiryo UI", 9F);
@@ -378,17 +379,6 @@
             this.ecbEnchant.Name = "ecbEnchant";
             this.ecbEnchant.Size = new System.Drawing.Size(288, 61);
             this.ecbEnchant.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.button1.Location = new System.Drawing.Point(176, 505);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 34);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "名前の巻物";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SelectEnchantsForm
             // 
