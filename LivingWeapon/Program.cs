@@ -17,9 +17,11 @@ namespace LivingWeapon
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Lists.Init(Version.Ver122, WeaponType.Melee, true);
-
-            //var form = new FIxSignatureListForm();
+            //テスト
+            //Lists.Init(Version.OO, WeaponType.Ranged, true);
+            //var form = new SelectSigForm();
+            
+            //本番
             var form = new SelectSignatureListForm();
 
             Application.Run(form);
