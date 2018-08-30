@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LivingWeapon.Business;
+using LivingWeapon.MyExt;
 
 namespace LivingWeapon
 {
@@ -60,6 +62,16 @@ namespace LivingWeapon
                     wType = WeaponType.Ranged;
 
                 }
+                else if (rdb7.Checked)
+                {
+                    version = Version.OO;
+                    wType = WeaponType.Melee;
+                }
+                else if (rdb8.Checked)
+                {
+                    version = Version.OO;
+                    wType = WeaponType.Ranged;
+                }
 
                 lblLoading.Text = "読み込み中…";
 
@@ -67,12 +79,31 @@ namespace LivingWeapon
 
                 try
                 {
-                    Lists.Init(version, wType, chkFeated.Checked);
+                    var checkedOO100000p = rdb7.Checked || rdb8.Checked;
+
+                    //ここに100000p用のラジオボタン分岐
+                    Option opt = checkedOO100000p ? Option.Feat100000p : (chkFeated.Checked ? Option.Feat : Option.NoFeat);
+                    if(checkedOO100000p && !chkFeated.Checked)
+                    {
+                        //エラー表示
+                        throw new SignatureListLoadException();
+                    }
+
+                    Lists.Init(version, wType, opt);
                 }
-                catch
+                catch (SignatureListLoadException sllex)
                 {
                     MessageBox.Show("銘リストファイルが見つかりませんでした。\r\n※ver1.22, ooのフィート無し銘リストはありません");
 
+                    return false;
+                }
+                catch(Exception ex)
+                {
+                    var message = new List<String> { "不明なエラーが発生しました。",
+                        ex.Message,
+                        (ex.InnerException != null ? ex.InnerException.Message : "") }.JoinS("\r\n");
+
+                    MessageBox.Show(message);
                     return false;
                 }
 
@@ -117,6 +148,15 @@ namespace LivingWeapon
 
         }
 
+        private void btnTestForm_Click(object sender, EventArgs e)
+        {
+            var success = LoadSignatureList();
 
+            if (!success) return;
+
+            var form = new TestForms.MakeMaxEnchantsList();
+
+            form.ShowDialog();
+        }
     }
 }

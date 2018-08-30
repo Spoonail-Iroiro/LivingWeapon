@@ -1,3 +1,7 @@
 LivingWeapon/Data/EnchantList/oo_Melee_Feat_1700000.csv filter=lfs diff=lfs merge=lfs -text
 LivingWeapon/Data/EnchantList/oo_Ranged_Feat_1700000.csv filter=lfs diff=lfs merge=lfs -text
 LivingWeapon/Data/EnchantList/oo_Ranged_Feat_1700000aaa.csv filter=lfs diff=lfs merge=lfs -text
+LivingWeapon/Data/EnchantList/oo_Melee_Feat100000p.cs filter=lfs diff=lfs merge=lfs -text
+LivingWeapon/Data/EnchantList/oo_Ranged_Feat100000p.cs filter=lfs diff=lfs merge=lfs -text
+LivingWeapon/Data/EnchantList/oo_Ranged_Feat100000p.csv filter=lfs diff=lfs merge=lfs -text
+LivingWeapon/Data/EnchantList/oo_Melee_Feat100000p.csv filter=lfs diff=lfs merge=lfs -text

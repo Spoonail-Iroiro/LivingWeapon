@@ -23,19 +23,15 @@ namespace LivingWeapon
 
             var targetList = new[]
             {
-                new { Version = Version.Ver116fix2b, WType = WeaponType.Melee, Feat = true },
-                new { Version = Version.Ver116fix2b, WType = WeaponType.Ranged, Feat = true },
+                new { Version = Version.Ver116fix2b, WType = WeaponType.Melee, Feat = Option.Feat },
+                new { Version = Version.Ver116fix2b, WType = WeaponType.Ranged, Feat = Option.Feat},
             };
 
             foreach (var target in targetList)
             {
                 Lists.Init(target.Version, target.WType, target.Feat);
 
-                var ver = target.Version == Version.Ver116fix2b ? "1.16fix2b" : "1.22";
-                var weapon = target.WType == WeaponType.Melee ? "Melee" : "Ranged";
-                var feat = target.Feat ? "Feat" : "NoFeat";
-
-                var filename = string.Join("_", ver, weapon, feat) + ".csv";
+                var filename = Lists.GetEnchantListSignature() + ".csv";
 
                 var filepath = System.IO.Path.Combine("./Data/EnchantList", filename);
 
@@ -88,7 +84,7 @@ namespace LivingWeapon
 
                 var writeCSV = csv.Select(row => row.JoinS(",")).JoinS("\r\n");
 
-                using (var fs = new System.IO.StreamWriter("{0}_new.csv".Args(string.Join("_", ver, weapon, feat)), false, Encoding.GetEncoding("Shift_JIS")))
+                using (var fs = new System.IO.StreamWriter("{0}_new.csv".Args(Lists.GetEnchantListSignature()), false, Encoding.GetEncoding("Shift_JIS")))
                 {
                     fs.Write(header + "\r\n" + writeCSV);
                 }

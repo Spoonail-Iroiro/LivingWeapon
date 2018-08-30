@@ -31,12 +31,34 @@ namespace LivingWeapon
 
             dgvEnchants.DataSource = _bs;
 
-            nudPageLimit.Value = Lists.SigList.SigList.Last().Page;
-
+            nudPageLimit.Value = GetLastPage();
+        
+            if(Lists.SelectedOption == Option.Feat100000p) SetUIFor100000p();
+            
             _nsForm = new InputDialog();
 
             AddOwnedForm(_nsForm);
 
+        }
+
+        private void SetUIFor100000p()
+        {
+            groupBox3.Enabled = false;
+
+            button1.Enabled = false;
+
+
+        }
+
+        private int GetLastPage()
+        {
+            //ここでoo100000p意外と分岐
+            if (Lists.SelectedOption == Option.Feat100000p)
+            {
+                return 100000;
+            }
+
+            return Lists.SigList.SigList.Last().Page;
         }
 
         private void ReloadTable()
@@ -130,7 +152,6 @@ namespace LivingWeapon
 
                 //色々☑
                 //エンチャント個数との整合性
-                //銘リストに存在しないエンチャチェック
                 var enchN = nudGoal.Value - nudStart.Value;
 
                 if (enchN < 0)

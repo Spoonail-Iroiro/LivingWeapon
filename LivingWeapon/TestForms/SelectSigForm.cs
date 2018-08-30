@@ -56,7 +56,7 @@ namespace LivingWeapon
         {
             var selectedEnchant = (EnchantType)cbxEnchant.SelectedValue;
 
-            var skList = SkillLists.GetSkillListOfEnchantType(selectedEnchant);
+            var skList = Lists.SkList.GetSkillListOfEnchantType(selectedEnchant);
             cbxAdd.DisplayMember = "Name";
             cbxAdd.DataSource = skList;
         }

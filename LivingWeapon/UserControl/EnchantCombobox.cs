@@ -30,7 +30,6 @@ namespace LivingWeapon
             //デザイナ用
             if (!Lists.ListLoaded) return;
 
-            _sigList = Lists.SigList;
             _etList = Lists.ETList;
 
             cbxEnchant.DisplayMember = "TypeDiscription";
@@ -40,9 +39,11 @@ namespace LivingWeapon
 
         internal Enchant GetEnchant()
         {
-            var rtn = new Enchant { Type = (EnchantType)cbxEnchant.SelectedValue, Skill = SkillLists.NonSkill };
+            var enchantType = (EnchantType)cbxEnchant.SelectedValue;
 
-            if(cbxSkill.Visible)
+            var rtn = new Enchant { Type = enchantType, Skill = SkillLists.NonSkill };
+
+            if(enchantType.HasSkill())
             {
                 rtn.Skill = (Skill)cbxSkill.SelectedValue;
             }
@@ -50,27 +51,25 @@ namespace LivingWeapon
             return rtn;            
         }
 
+        //選択されているエンチャントタイプに属するエンチャントをすべて取得する
         internal List<Enchant> GetAllEnchants()
         {
-            if (!HasSkills)
-            {
-                return new List<Enchant> { GetEnchant() };
-            }
+            var ench = GetEnchant();
 
-            var eType = GetEnchant().Type;
-
-            var rtns = _skills.Select(sk => new Enchant { Type = eType, Skill = sk }).ToList();
+            var rtns = EnchantFactory.GetAllEnchantWithEnchantType(ench.Type);
 
             return rtns;
         }
 
         private void cbxEnchant_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedEnchant = (EnchantType)cbxEnchant.SelectedValue;
+            var selectedEnchantType = (EnchantType)cbxEnchant.SelectedValue;
 
-            _skills = SkillLists.GetSkillListOfEnchantType(selectedEnchant);
+            var skillEnu = Lists.SkList.GetSkillListOfEnchantType(selectedEnchantType);
 
-            if(_skills != null)
+            _skills = skillEnu != null ? skillEnu.ToList() : null;
+
+            if(selectedEnchantType.HasSkill())
             {
                 cbxSkill.DisplayMember = "Name";
                 cbxSkill.DataSource = _skills;

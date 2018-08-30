@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using LivingWeapon.Properties;
+using LivingWeapon.Business;
+using LivingWeapon.MyExt;
 
 namespace LivingWeapon
 {
@@ -20,15 +24,27 @@ namespace LivingWeapon
         Ranged
     }
 
+    enum Option
+    {
+        Feat,
+        NoFeat,
+        Feat100000p
+    }
+
     static class Lists
     {
         public static SignatureList SigList { get; set; }
         public static EnchantTypeList ETList { get; set; }
         public static SkillLists SkList { get; set; }
 
-        
+        public static MaxEnchantSignatureLists MesList { get; set; }
+
+
         public static bool ListLoaded { get { return ETList != null; } }
         public static Version SelectedVersion { get; private set; }
+        public static WeaponType SelectedWType { get; private set; }
+        public static Option SelectedOption { get; private set; }
+
 
         /// <summary>
         /// エンチャントリストを読み込み各種リストクラスを初期化します。
@@ -36,16 +52,20 @@ namespace LivingWeapon
         /// <param name="version"></param>
         /// <param name="wtype"></param>
         /// <param name="feated"></param>
-        public static void Init(Version version, WeaponType wtype, bool feated)
+        public static void Init(Version version, WeaponType wtype, Option option)
         {
+            SelectedVersion = version;
+            SelectedWType = wtype;
+            SelectedOption = option;
+
             ETList = new EnchantTypeList();
-            SigList = new SignatureList(version, wtype, feated);
+            SigList = new SignatureList(version, wtype, option);
             SkList = new SkillLists();
 
             ETList.TrimEnchant(SigList);
             SigList.Validate();
-            SelectedVersion = version;
 
+            MesList = new MaxEnchantSignatureLists(Settings.Default.UseStaticJsonData);
         }
 
         public static Enchant GetEnchant(Signature signature)
@@ -56,13 +76,95 @@ namespace LivingWeapon
 
             //TODO 見つからなかった場合
 
-            var skillList = SkillLists.GetSkillListOfEnchantType(enchantType);
+            var skillList = Lists.SkList.GetSkillListOfEnchantType(enchantType);
 
             if (skillList == null) return new Enchant { Type = enchantType, Skill = SkillLists.NonSkill };
 
             var skill = skillList.First(sk => sk.Name == enchantType.GetSkillName(signature));
 
             return new Enchant { Type = enchantType, Skill = skill };
+        }
+
+        /// <summary>
+        /// 引数で指定された銘リストの識別子を返します。
+        /// </summary>
+        /// <returns></returns>
+        public static String GetEnchantListSignature(Version version, WeaponType wtype, Option option)
+        {
+            var ver = version == Version.Ver116fix2b ? "1.16fix2b" : (version == Version.Ver122 ? "1.22" : "oo");
+            var weapon = wtype == WeaponType.Melee ? "Melee" : "Ranged";
+            var opt = option == Option.Feat ? "Feat" : (option == Option.NoFeat ? "NoFeat" : "Feat100000p");
+
+            var signature = string.Join("_", ver, weapon, opt);
+
+            return signature;
+        }
+
+        /// <summary>
+        /// 現在読み込んでいる銘リストの識別子を返します。
+        /// </summary>
+        /// <returns></returns>
+        public static String GetEnchantListSignature()
+        {
+            return GetEnchantListSignature(SelectedVersion, SelectedWType, SelectedOption);
+        }
+
+
+    }
+
+    //検索高速化のため静的に保存するデータ（jsonファイル）関連のクラス
+    static class StaticJson
+    {
+        //値の保存用jsonパスを返します
+        public static String GetJsonPath(String key)
+        {
+            var path = System.IO.Path.Combine("./Data", "Json", key + "_" + Lists.GetEnchantListSignature() + ".json");
+
+            return path;
+        }
+
+        public static T Load<T>(String key)
+        {
+            var filepath = StaticJson.GetJsonPath(key);
+
+            try
+            {
+
+                using (var fs = new System.IO.StreamReader(filepath))
+                {
+                    var json = fs.ReadToEnd();
+
+                    var obj = JsonConvert.DeserializeObject<T>(json);
+
+                    return obj;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new StaticJsonLoadException("JSONのロード中にエラーが発生しました", ex);
+            }
+        }
+
+
+        public static void Save<T>(String key, T obj)
+        {
+            var filepath = StaticJson.GetJsonPath(key);
+
+            try
+            {
+
+                using (var fs = new System.IO.StreamWriter(filepath))
+                {
+                    var json = JsonConvert.SerializeObject(obj);
+
+                    fs.Write(json);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new StaticJsonLoadException("JSONのセーブ中にエラーが発生しました", ex);
+
+            }
         }
     }
 
@@ -71,28 +173,43 @@ namespace LivingWeapon
     {
         public List<Signature> SigList { get; set; }
 
-        public SignatureList(Version version, WeaponType wtype, bool feated)
+        public SignatureList(Version version, WeaponType wtype, Option opt)
         {
-            var ver = version == Version.Ver116fix2b ? "1.16fix2b" : (version == Version.Ver122 ? "1.22" : "oo");
-            var weapon = wtype == WeaponType.Melee ? "Melee" : "Ranged";
-            var feat = feated ? "Feat" : "NoFeat";
+            //100000ページ検索時はSigListオブジェクトを作らない
+            //if (opt == Option.Feat100000p) return;
 
-            var filename = string.Join("_", ver, weapon, feat) + (version == Version.OO ? "_170000" : "") + ".csv";
+            var filename = Lists.GetEnchantListSignature() + ".csv";
 
             var filepath = System.IO.Path.Combine("./Data/EnchantList", filename);
 
             var wholeText = "";
 
-            using (var fs = new System.IO.StreamReader(filepath, Encoding.GetEncoding("Shift_JIS")))
+            try
             {
-                //ヘッダ飛ばす
-                fs.ReadLine();
-                wholeText = fs.ReadToEnd();
+                using (var fs = new System.IO.StreamReader(filepath, Encoding.GetEncoding("Shift_JIS")))
+                {
+                    //ヘッダ飛ばす
+                    fs.ReadLine();
+                    wholeText = fs.ReadToEnd();
+                }
+            }
+            catch(System.IO.FileNotFoundException ex)
+            {
+                throw new SignatureListLoadException("", ex);
             }
 
             var rowText = wholeText.Replace("\r", "").Trim().Split('\n').ToList();
 
-            SigList = rowText.Select(row =>
+            SigList = GetSigList(rowText);
+
+        }
+
+        bool _isValid = false;
+
+        //銘リストの行区切りListからSigListを作成
+        public List<Signature> GetSigList(List<string> rowText)
+        {
+            var sigList = rowText.Select(row =>
             {
                 var cells = row.Split(',');
 
@@ -110,9 +227,8 @@ namespace LivingWeapon
                 };
             }).ToList();
 
-        }
-
-        bool _isValid = false;
+            return sigList;
+        } 
 
         //Noベースで銘を取得
         public Signature GetSignature(int no)
@@ -137,7 +253,10 @@ namespace LivingWeapon
         //GetSignatureが正常に動作するか確認する
         public bool Validate()
         {
-            foreach(var sig in SigList)
+            //100000p検索時はSigListを作らない
+            //if (Lists.SelectedOption == Option.Feat100000p) return true;
+
+            foreach (var sig in SigList)
             {
                 var noBaseSelect = GetSignatureOrNull(sig.No);
 
@@ -160,14 +279,37 @@ namespace LivingWeapon
         /// <returns></returns>
         public IEnumerable<Signature> SearchByEnchant(Enchant enchant, int pageLimit)
         {
-            var listSkip = 140;
-            var searchTake = 10;
+            if(Settings.Default.UseStaticJsonData)
+            {
+                return Lists.MesList.SearchByEnchant(enchant, pageLimit);
+            }
+            else
+            {
+                var listSkip = 140;
+
+                var searchSigList = SigList.Take(17 * pageLimit - 1).Skip(listSkip);
+
+                var sigs = SearchByEnchantRange(searchSigList, enchant);
+
+                return sigs;
+
+            }
+
+        }
+
+        /// <summary>
+        /// 検索範囲が限定されたsigsに対して該当するエンチャント銘の強度順（強度が同じ場合No順）にsearchTake個返します。
+        /// </summary>
+        /// <param name="sigs"></param>
+        /// <param name="enchant"></param>
+        /// <returns></returns>
+        public IEnumerable<Signature> SearchByEnchantRange(IEnumerable<Signature> sigs, Enchant enchant)
+        {
+            var searchTake = 100;
 
             var eType = enchant.Type;
 
-            var searchSigList = SigList.Take(17*pageLimit-1);
-
-            var sigs = searchSigList.Skip(listSkip).Where(sig => eType.IsMatch(sig));
+            sigs = sigs.Where(sig => eType.IsMatch(sig));
 
             if (enchant.HasSkill)
             {
@@ -280,8 +422,34 @@ namespace LivingWeapon
 
         public void TrimEnchant(SignatureList sigList)
         {
-            //sigListにないエンチャを除外
-            ETList = ETList.Where(et => sigList.SigList.Any(sig => et.IsMatch(sig.EnchantStr))).ToList();
+            var key = "TrimEnchant";
+
+            //100000ページ検索時は強制でJSON参照
+            if (Settings.Default.UseStaticJsonData || Lists.SelectedOption == Option.Feat100000p)
+            {
+                var etIDList = StaticJson.Load<List<int>>(key);
+
+                //sigListにないエンチャを除外
+                ETList = ETList.Where(et => etIDList.Contains(et.ID)).ToList();
+            }
+            else
+            {
+                //sigListにないエンチャを除外
+                ETList = ETList.Where(et => sigList.SigList.Any(sig => et.IsMatch(sig.EnchantStr))).ToList();
+
+                //保存用
+                var etIDList = ETList.Select(et => et.ID).ToList();
+
+                StaticJson.Save(key, etIDList);
+
+            }
+
+
+        }
+
+        public EnchantType GetEnchantType(int id)
+        {
+            return ETList.First(et => et.ID == id);
         }
     }
 
@@ -339,6 +507,15 @@ namespace LivingWeapon
 
             return TechSkillBoostEnchant.IsMatch(str);
         }
+
+        //スキル指定のあるエンチャントタイプかどうか
+        public bool HasSkill()
+        {
+            var skillList = Lists.SkList.GetSkillListOfEnchantType(this);
+
+            return  skillList != null;
+        }
+
 
 
     }
@@ -400,16 +577,21 @@ namespace LivingWeapon
 
     internal class SkillLists
     {
+        /*
         //主能力
         public static List<Skill> MainParamList { get; private set; } = new List<Skill>();
         //属性
         public static List<Skill> ElementList { get; private set; } = new List<Skill>();
         //技能
         public static List<Skill> TechSkillList { get; private set; } = new List<Skill>();
+        */
+
+        public static List<Skill> SkList { get; private set; } = new List<Skill>();
+
+        public static readonly Skill NonSkill = new Skill { ID = 99999, Name = "" };
 
         static SkillLists()
         {
-
             var filepath = System.IO.Path.Combine("./Eseshinpu/Data", "SkillData.csv");
 
             var wholeText = "";
@@ -431,27 +613,19 @@ namespace LivingWeapon
 
                 var id = int.Parse(cells[0]);
 
-                if (10 <= id && id <= 19)
-                {
-                    MainParamList.Add(new Skill { ID = id, Name = cells[1] });
-                }
-                else if (50 <= id && id <= 61)
-                {
-                    ElementList.Add(new Skill { ID = id, Name = cells[1] });
-                }
-                else if (150 <= id && id <= 189)
-                {
-                    TechSkillList.Add(new Skill { ID = id, Name = cells[1] });
-                }
+                SkList.Add(new Skill { ID = id, Name = cells[1] });
             }
 
             //出血属性の削除
-            ElementList.RemoveAll(sk => sk.ID == 61);
+            SkList.RemoveAll(sk => sk.ID == 61);
 
+            SkList.OrderBy(sk => sk.ID);
+
+            /*
             MainParamList.OrderBy(sk => sk.ID);
             ElementList.OrderBy(sk => sk.ID);
             TechSkillList.OrderBy(sk => sk.ID);
-
+            */
             /*
             SkillList = rowText.Select(row =>
             {
@@ -466,7 +640,33 @@ namespace LivingWeapon
             */
         }
 
-        public static readonly Skill NonSkill = new Skill { ID = 99999, Name = "" };
+        public enum SkillType
+        {
+            MainParam,
+            Element,
+            TechSkill,
+            Other
+        }
+
+        public static SkillType GetSkillType(int id)
+        {
+            if (10 <= id && id <= 19)
+            {
+                return SkillType.MainParam;
+            }
+            else if (50 <= id && id <= 61)
+            {
+                return SkillType.Element;
+            }
+            else if (150 <= id && id <= 189)
+            {
+                return SkillType.TechSkill;
+            }
+            else
+            {
+                return SkillType.Other;
+            }
+        }
 
         /*
           @"MainParam 1,～～（能力値）を上げる（下げる）,-,(..)(を)(\d+)(上げる)(.*)
@@ -478,35 +678,48 @@ namespace LivingWeapon
             //9,～～を装填できる,矢弾,(.+)(を装填できる)(.*)"
          */
 
+        public Skill GetSkill(int id)
+        {
+            if (NonSkill.ID == id) return NonSkill;
+
+            return SkList.First(sk => sk.ID == id);
+        }
+
         /// <summary>
         /// エンチャントタイプに付随するスキルに対応するスキルリストを返します。スキルがないエンチャントタイプの場合nullが返されます。
         /// </summary>
         /// <param name="enchantType">エンチャントタイプ</param>
         /// <returns></returns>
-        public static List<Skill> GetSkillListOfEnchantType(EnchantType enchantType)
+        public IEnumerable<Skill> GetSkillListOfEnchantType(EnchantType enchantType)
         {
             return GetSkillListOfEnchantType(enchantType.ID);
         }
 
-        public static List<Skill> GetSkillListOfEnchantType(int enchantTypeID)
+        public IEnumerable<Skill> GetSkillListOfEnchantType(int enchantTypeID)
         {
+            //IDによるスキル種類の違い
+            var type = SkillType.Element;
+
             switch (enchantTypeID)
             {
                 case 1:
                 case 6:
-                    return MainParamList;
+                    type = SkillType.MainParam;
                     break;
                 case 2:
                 case 7:
-                    return ElementList;
+                    type = SkillType.Element;
                     break;
                 case 3:
-                    return TechSkillList;
+                    type = SkillType.TechSkill;
                     break;
                 default:
                     return null;
                     break;
             }
+
+            return SkList.Where(sk => GetSkillType(sk.ID) == type);
+
 
         }
 
@@ -581,6 +794,142 @@ namespace LivingWeapon
         {
             return this.Type.ID ^ this.Skill.ID;
         }
+    }
+
+    //EnchantTypeとSkillからなるEnchantクラスのオブジェクトを包括的に管理するクラス
+    static class EnchantFactory
+    {
+        public static List<Enchant> GetAllEnchant()
+        {
+            var enchList = new List<Enchant> { };
+
+            foreach (var et in Lists.ETList.ETList)
+            {
+                enchList.AddRange(GetAllEnchantWithEnchantType(et));
+
+                /*
+                if (!et.HasSkill())
+                {
+                    var rtn = new Enchant { Type = et, Skill = SkillLists.NonSkill };
+                    enchList.Add(rtn);
+                    continue;
+                }
+
+                var skills = Lists.SkList.GetSkillListOfEnchantType(et);
+
+                var rtns = skills.Select(sk => new Enchant { Type = et, Skill = sk }).ToList();
+
+                enchList.AddRange(rtns);
+                */
+            }
+
+            return enchList;
+        }
+
+        public static List<Enchant> GetAllEnchantWithEnchantType(EnchantType eType)
+        {
+            if (!eType.HasSkill())
+            {
+                var rtn = new Enchant { Type = eType, Skill = SkillLists.NonSkill };
+                return new List<Enchant> { rtn };
+            }
+
+            var skills = Lists.SkList.GetSkillListOfEnchantType(eType);
+
+            var rtns = skills.Select(sk => new Enchant { Type = eType, Skill = sk }).ToList();
+
+            return rtns;
+        }
+    }
+
+    //すべてのエンチャントに対し、最強強度を持つエンチャント銘のランキングリストを持つクラス
+    internal class MaxEnchantSignatureLists
+    {
+        public List<MaxEnchantSignatures> MaxEnchantSigList { get; private set; }
+
+        public MaxEnchantSignatureLists(bool load = true)
+        {
+            //読み込み
+
+            if(load)
+            {
+                var proxyList = StaticJson.Load<List<MESproxy>>("MESList");
+
+                MaxEnchantSigList = proxyList.Select(pl => GetMES(pl)).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 静的jsonを読み込んでいる場合に、SignatureList.SearchByEnchantを代替する
+        /// </summary>
+        /// <param name="ench"></param>
+        /// <param name="pageLimit"></param>
+        /// <returns></returns>
+        public List<Signature> SearchByEnchant(Enchant ench, int pageLimit)
+        {
+            var pair = MaxEnchantSigList.First(mes => mes.Ench.Equals(ench));
+
+            var limited = pair.Sigs.Where(sig => sig.Page <= pageLimit);
+
+            return limited.ToList();
+        }
+
+        //ファイル書き出し用
+        public void SetMaxEnchantSigList(List<MaxEnchantSignatures> mes)
+        {
+            MaxEnchantSigList = mes;
+        }
+
+        //ファイル書き出し用
+        public void Save()
+        {
+            var proxys = MaxEnchantSigList.Select(mes => GetProxy(mes)).ToList();
+
+            StaticJson.Save<List<MESproxy>>("MESList", proxys);
+        }
+
+        internal List<Signature> GetSignatureRankingList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private MESproxy GetProxy(MaxEnchantSignatures mes)
+        {
+            var etSkStr = "{0}-{1}".Args(mes.Ench.Type.ID, mes.Ench.Skill.ID);
+            var signos = mes.Sigs.Select(sig => sig.No).ToList();
+
+            return new MESproxy { EtSkStr = etSkStr, SignatureNos = signos };
+        }
+
+        private MaxEnchantSignatures GetMES(MESproxy proxy)
+        {
+            var keys = proxy.EtSkStr.Split('-');
+            int etID = int.Parse(keys[0]);
+            int skID = int.Parse(keys[1]);
+            //IDでEnchantTypeとSkillを引っ張ってくる
+            var ench = new Enchant { Type = Lists.ETList.GetEnchantType(etID), Skill = Lists.SkList.GetSkill(skID) };
+
+            var sigs = proxy.SignatureNos.Select(sno => Lists.SigList.GetSignature(sno)).ToList();
+
+            return new MaxEnchantSignatures { Ench = ench, Sigs = sigs };
+
+        }
+
+        //上記クラスのjsonプロキシ
+        public class MESproxy
+        {
+            //EnchantTypeID-SkillID形式の文字列
+            public string EtSkStr { get; set; }
+            public List<int> SignatureNos { get; set; }
+        }
+
+    }
+
+    internal class MaxEnchantSignatures
+    {
+        internal Enchant Ench { get; set; }
+        internal List<Signature> Sigs { get; set; }
+
     }
 
 }
