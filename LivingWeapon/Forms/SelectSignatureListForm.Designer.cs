@@ -41,6 +41,7 @@
             this.rdb3 = new System.Windows.Forms.RadioButton();
             this.rdb2 = new System.Windows.Forms.RadioButton();
             this.rdb1 = new System.Windows.Forms.RadioButton();
+            this.btnEvil = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.groupBox1.Controls.Add(this.rdb5);
             this.groupBox1.Controls.Add(this.lblLoading);
             this.groupBox1.Controls.Add(this.btnTestForm);
+            this.groupBox1.Controls.Add(this.btnEvil);
             this.groupBox1.Controls.Add(this.btnOK);
             this.groupBox1.Controls.Add(this.chkFeated);
             this.groupBox1.Controls.Add(this.rdb4);
@@ -123,7 +125,7 @@
             // lblLoading
             // 
             this.lblLoading.AutoSize = true;
-            this.lblLoading.Location = new System.Drawing.Point(143, 318);
+            this.lblLoading.Location = new System.Drawing.Point(116, 278);
             this.lblLoading.Name = "lblLoading";
             this.lblLoading.Size = new System.Drawing.Size(0, 25);
             this.lblLoading.TabIndex = 12;
@@ -219,6 +221,18 @@
             this.rdb1.Text = "ver1.16fix2b 近接武器";
             this.rdb1.UseVisualStyleBackColor = true;
             // 
+            // btnEvil
+            // 
+            this.btnEvil.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnEvil.Location = new System.Drawing.Point(163, 313);
+            this.btnEvil.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEvil.Name = "btnEvil";
+            this.btnEvil.Size = new System.Drawing.Size(130, 34);
+            this.btnEvil.TabIndex = 11;
+            this.btnEvil.Text = "邪悪な武器";
+            this.btnEvil.UseVisualStyleBackColor = true;
+            this.btnEvil.Click += new System.EventHandler(this.btnEvil_Click);
+            // 
             // SelectSignatureListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -251,5 +265,6 @@
         private System.Windows.Forms.RadioButton rdb8;
         private System.Windows.Forms.RadioButton rdb7;
         private System.Windows.Forms.Button btnTestForm;
+        private System.Windows.Forms.Button btnEvil;
     }
 }

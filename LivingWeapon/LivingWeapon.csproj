@@ -72,6 +72,18 @@
     <Compile Include="Forms\DGVForm.Designer.cs">
       <DependentUpon>DGVForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EvilWeaponSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EvilWeaponSettingForm.Designer.cs">
+      <DependentUpon>EvilWeaponSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EvilWeaponResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EvilWeaponResultForm.Designer.cs">
+      <DependentUpon>EvilWeaponResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sub\InputDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +178,9 @@
     <EmbeddedResource Include="Forms\DGVForm.resx">
       <DependentUpon>DGVForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EvilWeaponSettingForm.resx">
+      <DependentUpon>EvilWeaponSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LvEnchantingSignatureForm.resx">
       <DependentUpon>LvEnchantingSignatureForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShowEnchantInfoForm.resx">
       <DependentUpon>ShowEnchantInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EvilWeaponResultForm.resx">
+      <DependentUpon>EvilWeaponResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SignatureCombinationResultForm.resx">
       <DependentUpon>SignatureCombinationResultForm.cs</DependentUpon>

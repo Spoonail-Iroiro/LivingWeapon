@@ -12,105 +12,47 @@ using System.IO;
 
 namespace LivingWeapon
 {
-    public partial class SignatureCombinationResultForm : BaseForm
+    public partial class EvilWeaponResultForm : BaseForm
     {
         private Form _previousForm;
-        private List<SearchingEnchant> _result;
-        int _retryN;
+        private EvilWeaponCalc _result;
         Dictionary<string, Form> _subForms;
-
-        internal int StartLevel { get; private set; }
-        internal int GoalLevel { get; private set; }
-        internal SelectedEnchants SelectedEnchants { get; private set; }
 
         #region コンストラクタとロード
 
-        internal SignatureCombinationResultForm()
+        internal EvilWeaponResultForm()
         {
             InitializeComponent();
         }
 
         //この前でgoalLevel - startLevel(付けられる個数)がselectedEnchantsの個数と合っていることを保証（Select→Confirmの間）
-        internal SignatureCombinationResultForm(Form previous, int startLevel, int goalLevel, SelectedEnchants selectedEnchants) : this()
+        internal EvilWeaponResultForm(Form previous, EvilWeaponCalc ecalc) : this()
         {
             _previousForm = previous;
 
-            StartLevel = startLevel;
-            GoalLevel = goalLevel;
-            SelectedEnchants = selectedEnchants;
+            _result = ecalc;
+
+            _subForms = new Dictionary<string, Form>();
         }
 
         private void SignatureCombinationResultForm_Load(object sender, EventArgs e)
         {
-            var result = new List<SearchingEnchant>();
-
-            DepthSearch2(out result);
-
-            _result = result;
-
-            txtMain.Text = GetResultStr(_result);
-
-            _subForms = new Dictionary<string, Form>();
+            txtMain.Text = _result.GetResultStr();
 
             {
-                var table = GetResultTable(_result);
+                var table = _result.GetResultTable();
 
-                var form = new DGVForm(table, true);
+                var form = new DGVForm(table, false);
 
                 form.Hide();
 
                 _subForms["ResultAsList"] = form;
             }
-
-            {
-                var sigList = _result.Select(sSig => sSig.EnchantingSignature).ToList();
-
-                var form = new LvEnchantingSignatureForm(sigList, StartLevel);
-
-                form.Hide();
-
-                _subForms["LvEnchantingSignature"] = form;
-            }
-
-            {
-                var tableReal = SelectedEnchants.GetEnchantingSignatureList();
-                var tableIdeal = SelectedEnchants.GetIdealEnchantingSignatureList();
-
-                var form = new ShowEnchantInfoForm(tableIdeal, tableReal, _retryN);
-
-                form.Hide();
-
-                _subForms["EnchantInfo"] = form;
-
-            }
-
-
         }
 
         #endregion
 
-        private string GetResultStr(List<SearchingEnchant> result)
-        {
-            return result.Select((sEnch, index)
-=>
-            {
-                var level = StartLevel + index;
-
-                var choice = sEnch.GetChoiceSignature(level);
-
-                return "{0,2}=>{1,2} |{2,7},{3,6}ページ, {4}, {5}, 強度{6}, （血吸{7}）".Args(
-                    level.ToString().PadLeft(2),
-                    (level + 1).ToString().PadLeft(2),
-                    choice.No,
-                    choice.Page,
-                    choice.Name,
-                    sEnch.EnchantingSignature.EnchantStr,
-                    sEnch.EnchantingSignature.Value,
-                    choice.BloodLevel);
-            })
-            .JoinS("\r\n") + "\r\n";
-        }
-
+        /*
         private DataTable GetResultTable(List<SearchingEnchant> result)
         {
             var table = new DataTable();
@@ -149,72 +91,7 @@ namespace LivingWeapon
 
 
             return table;
-        }
-
-        private bool DepthSearch2(out List<SearchingEnchant> result)
-        {
-            var enchantingSignatures = SelectedEnchants.GetEnchantingSignatureList();
-
-            //ループココから
-
-            for (var i = 0; i < 200; ++i)
-            {
-                List<SearchingEnchant> searchingEnchants =
-                    enchantingSignatures
-                    .Select(enchSig => new SearchingEnchant(StartLevel, GoalLevel, enchSig))
-                    .ToList();
-
-                var dfs = new EnchantOrderDFS(StartLevel, GoalLevel, searchingEnchants);
-
-                var success = dfs.ExecDFS(out result);
-
-                if (success)
-                {
-                    _retryN = i;
-
-                    //レベル高い順に並んでいるので逆にする
-                    result.Reverse();
-
-                    return true;
-                }
-                else
-                {
-                    var report = dfs.FirstFailureReport;
-
-                    //reportを元に新しいエンチャント銘セットを選び直す
-                    for (int rank = 1; rank < 10; ++rank)
-                    {
-                        //探索中の最初の失敗時の枝
-                        foreach (var index in report.BranchList.AsEnumerable().Reverse().ToList())
-                        {
-                            var pick = SelectedEnchants.GetEnchantingSignature(index, rank);
-
-                            //最初の失敗を回避できないか確認する
-                            var pickInfo = new SearchingEnchant(StartLevel, GoalLevel, pick);
-
-                            //最初の失敗を回避できるならば
-                            if (pickInfo.GetChoiceSignature(report.Level).BloodLevel > report.Level)
-                            {
-                                //採用する
-                                SelectedEnchants.SetValueRank(index, rank);
-
-                                //2重ループを抜ける
-                                goto SEARCHING_ENCHANTSET_FINISH;
-                            }
-                        }
-
-                    }
-
-                    SEARCHING_ENCHANTSET_FINISH: enchantingSignatures = SelectedEnchants.GetEnchantingSignatureList();
-
-                }
-            }
-
-            result = null;
-
-            return false;
-
-        }
+        }*/
 
         #region イベントハンドラ
         private void btnShowTable_Click(object sender, EventArgs e)
@@ -224,7 +101,7 @@ namespace LivingWeapon
 
         private void btnSaveAsFile_Click(object sender, EventArgs e)
         {
-            var content = GetResultStr(_result);
+            var content = _result.GetResultStr();
 
             var sfd = new SaveFileDialog();
 
@@ -276,7 +153,7 @@ namespace LivingWeapon
 
         private void SignatureCombinationResultForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach(var form in _subForms.Values)
+            foreach (var form in _subForms.Values)
             {
                 form.Close();
             }
@@ -292,6 +169,7 @@ namespace LivingWeapon
         #endregion
 
         #region hide
+        /*
         private bool SimpleSearchBody(List<SearchingEnchant> searchingEnchants, out List<SearchingEnchant> result, out string log)
         {
             result = new List<SearchingEnchant>();
@@ -329,7 +207,6 @@ namespace LivingWeapon
                 }
 
             }
-            /*
             resultSigs = result.Select((sEnch, index)
             =>
             {
@@ -337,7 +214,7 @@ namespace LivingWeapon
 
                 return sEnch.GetChoiceSignature(level);
             }).ToList();
-            */
+            
 
             var resultStr = GetResultStr(result);
 
@@ -429,14 +306,8 @@ namespace LivingWeapon
 
 
         #endregion
-
-        private void chkFont_CheckedChanged(object sender, EventArgs e)
-        {
-            var font = chkFont.Checked ? new Font("ＭＳ ゴシック", 10) : new Font("Meiryo UI", 9);
-            txtMain.Font = font;
-        }
     }
-
+    /*
     class EnchantOrderDFS
     {
         public List<SearchingEnchant> Result { get; private set; }
@@ -560,5 +431,13 @@ namespace LivingWeapon
 
 
 
+    }*/
+        #endregion
+
+        private void chkFont_CheckedChanged(object sender, EventArgs e)
+        {
+            var font = chkFont.Checked ? new Font("ＭＳ ゴシック", 10) : new Font("Meiryo UI", 9);
+            txtMain.Font = font;
+        }
     }
 }

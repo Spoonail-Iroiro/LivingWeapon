@@ -109,6 +109,17 @@ namespace LivingWeapon
             return GetEnchantListSignature(SelectedVersion, SelectedWType, SelectedOption);
         }
 
+        public static int GetNoFromID(int id)
+        {
+            return id - 50500;
+
+        }
+
+        public static int GetIDFromNo(int no)
+        {
+            return no + 50500;
+
+        }
 
     }
 
@@ -326,7 +337,7 @@ namespace LivingWeapon
     }
 
     //銘リスト1行に対応するクラス
-    class Signature
+    public class Signature
     {
         public int No { get; set; }
         public int Page { get; set; }
@@ -345,6 +356,35 @@ namespace LivingWeapon
                 //Enchant = Lists.GetEnchant(this);
             }
         }
+
+        public string EnchantStrWithoutValue
+        {
+            get
+            {
+                var ench = Lists.GetEnchant(this);
+
+                switch (ench.Type.ID)
+                {
+                    case 1:
+                        var par = ench.Type.GetParams(this);
+
+                        par[0] = "";
+                        par[3] = "_";
+
+                        return par.JoinS("");
+
+                        break;
+                    default:
+                        var valueSplit = EnchantStr.Split('[');
+
+                        return valueSplit[0] + (valueSplit.Length > 1 ? "[___]" : "");
+
+                        break;
+                }
+
+            }
+        }
+
         public int Value { get; set; }
         public int BloodLevel { get; set; }
         public bool Selectable { get; set; } = false;

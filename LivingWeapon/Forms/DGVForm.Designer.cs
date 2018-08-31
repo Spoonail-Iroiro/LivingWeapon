@@ -29,11 +29,24 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.chkFont = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveAsCSV = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
+            // 
+            // chkFont
+            // 
+            this.chkFont.AutoSize = true;
+            this.chkFont.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.chkFont.Location = new System.Drawing.Point(201, 444);
+            this.chkFont.Name = "chkFont";
+            this.chkFont.Size = new System.Drawing.Size(130, 29);
+            this.chkFont.TabIndex = 12;
+            this.chkFont.Text = "等幅フォント";
+            this.chkFont.UseVisualStyleBackColor = true;
+            this.chkFont.CheckedChanged += new System.EventHandler(this.chkFont_CheckedChanged);
             // 
             // label1
             // 
@@ -88,6 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 486);
+            this.Controls.Add(this.chkFont);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSaveAsCSV);
             this.Controls.Add(this.dgvMain);
@@ -105,5 +119,6 @@
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.Button btnSaveAsCSV;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkFont;
     }
 }

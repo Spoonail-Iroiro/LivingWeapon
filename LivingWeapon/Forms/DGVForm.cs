@@ -21,9 +21,11 @@ namespace LivingWeapon
             InitializeComponent();
         }
 
-        public DGVForm(DataTable table) : this()
+        public DGVForm(DataTable table, bool IsScrollOfNameButtonOn) : this()
         {
             dgvMain.DataSource = table;
+
+            if (!IsScrollOfNameButtonOn) return;
 
             var buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.Name = "ScrollOfName";
@@ -112,6 +114,17 @@ namespace LivingWeapon
                 _snForm.Show();
 
 
+            }
+        }
+
+        private void chkFont_CheckedChanged(object sender, EventArgs e)
+        {
+            var font = chkFont.Checked ? new Font("ＭＳ ゴシック", 12) : new Font("Meiryo UI", 9);
+
+            foreach (DataGridViewColumn col in dgvMain.Columns)
+            {
+
+                col.DefaultCellStyle.Font = font;
             }
         }
     }

@@ -158,5 +158,26 @@ namespace LivingWeapon
 
             form.ShowDialog();
         }
+
+        private void btnEvil_Click(object sender, EventArgs e)
+        {
+            var success = LoadSignatureList();
+
+            if (!success) return;
+
+            var form = new EvilWeaponSettingForm();
+
+            this.Hide();
+
+            form.ShowDialog();
+
+            if (Util.IsAppClosed)
+            {
+                Close();
+                return;
+            }
+
+            this.Show();
+        }
     }
 }
