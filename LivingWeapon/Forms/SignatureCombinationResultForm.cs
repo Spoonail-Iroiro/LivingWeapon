@@ -38,6 +38,9 @@ namespace LivingWeapon
             StartLevel = startLevel;
             GoalLevel = goalLevel;
             SelectedEnchants = selectedEnchants;
+
+            FormBorderStyle = FormBorderStyle.Sizable;
+            MaximizeBox = true;
         }
 
         private void SignatureCombinationResultForm_Load(object sender, EventArgs e)

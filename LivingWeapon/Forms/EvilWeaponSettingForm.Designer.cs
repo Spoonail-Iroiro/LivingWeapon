@@ -38,14 +38,14 @@
             this.groupbox1 = new System.Windows.Forms.GroupBox();
             this.btnEnchOK = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.nudLv = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupbox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -59,7 +59,6 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(137, 27);
             this.txtID.TabIndex = 0;
-            this.txtID.Text = "68042";
             // 
             // txtSelect2
             // 
@@ -69,7 +68,6 @@
             this.txtSelect2.Name = "txtSelect2";
             this.txtSelect2.Size = new System.Drawing.Size(68, 27);
             this.txtSelect2.TabIndex = 0;
-            this.txtSelect2.Text = "g";
             // 
             // txtSelect1
             // 
@@ -79,7 +77,6 @@
             this.txtSelect1.Name = "txtSelect1";
             this.txtSelect1.Size = new System.Drawing.Size(68, 27);
             this.txtSelect1.TabIndex = 0;
-            this.txtSelect1.Text = "a";
             // 
             // label2
             // 
@@ -155,26 +152,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "選択肢設定";
             // 
-            // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(12, 378);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(98, 33);
-            this.btnBack.TabIndex = 6;
-            this.btnBack.Text = "戻る";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(324, 378);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(98, 33);
-            this.btnNext.TabIndex = 6;
-            this.btnNext.Text = "次へ";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -192,6 +169,28 @@
             this.label1.Size = new System.Drawing.Size(413, 19);
             this.label1.TabIndex = 5;
             this.label1.Text = "上記のエンチャントの強度が最大になる時の選択肢（アルファベット）";
+            // 
+            // btnBack
+            // 
+            this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnBack.Location = new System.Drawing.Point(12, 379);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(98, 33);
+            this.btnBack.TabIndex = 6;
+            this.btnBack.Text = "戻る";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnNext.Location = new System.Drawing.Point(324, 379);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(98, 33);
+            this.btnNext.TabIndex = 6;
+            this.btnNext.Text = "次へ";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // label5
             // 
@@ -214,15 +213,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "出力数";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(193, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 19);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "まで";
-            // 
             // nudLv
             // 
             this.nudLv.Location = new System.Drawing.Point(78, 27);
@@ -239,6 +229,15 @@
             0,
             0,
             0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(193, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 19);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "まで";
             // 
             // EvilWeaponSettingForm
             // 

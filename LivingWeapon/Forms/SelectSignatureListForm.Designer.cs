@@ -35,18 +35,21 @@
             this.rdb5 = new System.Windows.Forms.RadioButton();
             this.lblLoading = new System.Windows.Forms.Label();
             this.btnTestForm = new System.Windows.Forms.Button();
+            this.btnEvil = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.chkFeated = new System.Windows.Forms.CheckBox();
             this.rdb4 = new System.Windows.Forms.RadioButton();
             this.rdb3 = new System.Windows.Forms.RadioButton();
             this.rdb2 = new System.Windows.Forms.RadioButton();
             this.rdb1 = new System.Windows.Forms.RadioButton();
-            this.btnEvil = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.rdb8);
             this.groupBox1.Controls.Add(this.rdb7);
             this.groupBox1.Controls.Add(this.rdb6);
@@ -65,7 +68,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(358, 359);
+            this.groupBox1.Size = new System.Drawing.Size(388, 365);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "バージョン・ヴァリアントを選ぶ";
@@ -125,9 +128,10 @@
             // lblLoading
             // 
             this.lblLoading.AutoSize = true;
-            this.lblLoading.Location = new System.Drawing.Point(116, 278);
+            this.lblLoading.Font = new System.Drawing.Font("Meiryo UI", 10F);
+            this.lblLoading.Location = new System.Drawing.Point(106, 281);
             this.lblLoading.Name = "lblLoading";
-            this.lblLoading.Size = new System.Drawing.Size(0, 25);
+            this.lblLoading.Size = new System.Drawing.Size(0, 22);
             this.lblLoading.TabIndex = 12;
             // 
             // btnTestForm
@@ -140,17 +144,32 @@
             this.btnTestForm.TabIndex = 11;
             this.btnTestForm.Text = "テスト";
             this.btnTestForm.UseVisualStyleBackColor = true;
+            this.btnTestForm.Visible = false;
             this.btnTestForm.Click += new System.EventHandler(this.btnTestForm_Click);
+            // 
+            // btnEvil
+            // 
+            this.btnEvil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEvil.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.btnEvil.Location = new System.Drawing.Point(202, 319);
+            this.btnEvil.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEvil.Name = "btnEvil";
+            this.btnEvil.Size = new System.Drawing.Size(171, 34);
+            this.btnEvil.TabIndex = 11;
+            this.btnEvil.Text = "(β) 邪悪な武器";
+            this.btnEvil.UseVisualStyleBackColor = true;
+            this.btnEvil.Click += new System.EventHandler(this.btnEvil_Click);
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnOK.Location = new System.Drawing.Point(7, 313);
+            this.btnOK.Location = new System.Drawing.Point(7, 319);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(130, 34);
+            this.btnOK.Size = new System.Drawing.Size(171, 34);
             this.btnOK.TabIndex = 11;
-            this.btnOK.Text = "決定";
+            this.btnOK.Text = "生き武器";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -221,23 +240,11 @@
             this.rdb1.Text = "ver1.16fix2b 近接武器";
             this.rdb1.UseVisualStyleBackColor = true;
             // 
-            // btnEvil
-            // 
-            this.btnEvil.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnEvil.Location = new System.Drawing.Point(163, 313);
-            this.btnEvil.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnEvil.Name = "btnEvil";
-            this.btnEvil.Size = new System.Drawing.Size(130, 34);
-            this.btnEvil.TabIndex = 11;
-            this.btnEvil.Text = "邪悪な武器";
-            this.btnEvil.UseVisualStyleBackColor = true;
-            this.btnEvil.Click += new System.EventHandler(this.btnEvil_Click);
-            // 
             // SelectSignatureListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 381);
+            this.ClientSize = new System.Drawing.Size(419, 387);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SelectSignatureListForm";

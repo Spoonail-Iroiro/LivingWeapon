@@ -34,10 +34,6 @@ namespace LivingWeapon
             nudPageLimit.Value = GetLastPage();
         
             if(Lists.SelectedOption == Option.Feat100000p) SetUIFor100000p();
-            
-            _nsForm = new InputDialog();
-
-            AddOwnedForm(_nsForm);
 
         }
 
@@ -211,7 +207,10 @@ namespace LivingWeapon
                 Util.ExitApplication();
             }
 
-            _nsForm.Close();
+            if(_nsForm != null)
+            {
+                _nsForm.Close();
+            }
         }
 
         #endregion
@@ -223,6 +222,12 @@ namespace LivingWeapon
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (_nsForm != null) _nsForm.Dispose();
+
+            _nsForm = new InputDialog();
+
+            AddOwnedForm(_nsForm);
+
             _nsForm.Show();
             _nsForm.WindowState = FormWindowState.Normal;
             _nsForm.Activate();

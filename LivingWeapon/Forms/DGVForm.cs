@@ -25,6 +25,10 @@ namespace LivingWeapon
         {
             dgvMain.DataSource = table;
 
+            //明示的にウィンドウを可変に
+            FormBorderStyle = FormBorderStyle.Sizable;
+            MaximizeBox = true;
+
             if (!IsScrollOfNameButtonOn) return;
 
             var buttonColumn = new DataGridViewButtonColumn();

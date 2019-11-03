@@ -24,11 +24,13 @@ namespace LivingWeapon
             if (txtSelect1.Text == "" || txtSelect2.Text == "")
             {
                 MessageBox.Show("選択肢を2つ入力してください");
+                return;
             }
 
             if (txtSelect1.Text == txtSelect2.Text)
             {
                 MessageBox.Show("異なる選択肢を2つ入力してください");
+                return;
             }
 
             var backOffset1 = txtSelect1.Text[0] - 'a';
@@ -83,10 +85,12 @@ namespace LivingWeapon
             catch (FormatException ex)
             {
                 MessageBox.Show("入力が数値ではありません");
+                return;
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
 
             var sigList = Lists.SigList;

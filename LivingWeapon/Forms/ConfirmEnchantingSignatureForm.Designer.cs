@@ -49,6 +49,7 @@
             // 
             // btnBack
             // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.btnBack.Location = new System.Drawing.Point(17, 621);
             this.btnBack.Name = "btnBack";
@@ -60,6 +61,7 @@
             // 
             // btnNext
             // 
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.btnNext.Location = new System.Drawing.Point(523, 621);
             this.btnNext.Name = "btnNext";
@@ -95,6 +97,8 @@
             this.dgvSigs.AllowUserToDeleteRows = false;
             this.dgvSigs.AllowUserToResizeColumns = false;
             this.dgvSigs.AllowUserToResizeRows = false;
+            this.dgvSigs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSigs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSigs.Location = new System.Drawing.Point(17, 214);
             this.dgvSigs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

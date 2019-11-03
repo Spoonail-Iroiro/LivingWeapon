@@ -33,6 +33,9 @@ namespace LivingWeapon
             _result = ecalc;
 
             _subForms = new Dictionary<string, Form>();
+
+            FormBorderStyle = FormBorderStyle.Sizable;
+            MaximizeBox = true;
         }
 
         private void SignatureCombinationResultForm_Load(object sender, EventArgs e)
@@ -52,46 +55,6 @@ namespace LivingWeapon
 
         #endregion
 
-        /*
-        private DataTable GetResultTable(List<SearchingEnchant> result)
-        {
-            var table = new DataTable();
-
-            table.Columns.Add(new DataColumn("Lv", typeof(int)));
-            table.Columns.Add(new DataColumn("LvUp", typeof(int)));
-            table.Columns.Add(new DataColumn("No", typeof(int)));
-            table.Columns.Add(new DataColumn("ページ", typeof(int)));
-            table.Columns.Add(new DataColumn("銘", typeof(string)));
-            table.Columns.Add(new DataColumn("選択するエンチャント", typeof(string)));
-            table.Columns.Add(new DataColumn("強度", typeof(int)));
-            table.Columns.Add(new DataColumn("血吸", typeof(int)));
-
-            var rows = result.Select((sEnch, index) =>
-            {
-                var level = StartLevel + index;
-                var choice = sEnch.GetChoiceSignature(level);
-
-                return new object[]
-                {
-                    level,
-                    level +1,
-                    choice.No,
-                    choice.Page,
-                    choice.Name,
-                    sEnch.EnchantingSignature.EnchantStr,
-                    sEnch.EnchantingSignature.Value,
-                    choice.BloodLevel
-                };
-            });
-
-            foreach (var row in rows)
-            {
-                table.Rows.Add(row);
-            }
-
-
-            return table;
-        }*/
 
         #region イベントハンドラ
         private void btnShowTable_Click(object sender, EventArgs e)

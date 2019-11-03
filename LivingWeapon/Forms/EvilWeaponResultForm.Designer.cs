@@ -49,14 +49,19 @@
             // 
             // txtMain
             // 
+            this.txtMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMain.Location = new System.Drawing.Point(17, 37);
             this.txtMain.Multiline = true;
             this.txtMain.Name = "txtMain";
-            this.txtMain.Size = new System.Drawing.Size(681, 449);
+            this.txtMain.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMain.Size = new System.Drawing.Size(804, 449);
             this.txtMain.TabIndex = 4;
             // 
             // btnSaveAsFile
             // 
+            this.btnSaveAsFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSaveAsFile.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.btnSaveAsFile.Location = new System.Drawing.Point(122, 492);
             this.btnSaveAsFile.Name = "btnSaveAsFile";
@@ -68,6 +73,7 @@
             // 
             // btnShowTable
             // 
+            this.btnShowTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnShowTable.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.btnShowTable.Location = new System.Drawing.Point(266, 492);
             this.btnShowTable.Name = "btnShowTable";
@@ -79,8 +85,9 @@
             // 
             // btnExit
             // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.btnExit.Location = new System.Drawing.Point(586, 493);
+            this.btnExit.Location = new System.Drawing.Point(709, 493);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(112, 34);
             this.btnExit.TabIndex = 5;
@@ -90,6 +97,7 @@
             // 
             // btnBack
             // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBack.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.btnBack.Location = new System.Drawing.Point(17, 492);
             this.btnBack.Name = "btnBack";
@@ -101,6 +109,7 @@
             // 
             // chkFont
             // 
+            this.chkFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkFont.AutoSize = true;
             this.chkFont.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.chkFont.Location = new System.Drawing.Point(410, 496);
@@ -115,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 539);
+            this.ClientSize = new System.Drawing.Size(836, 539);
             this.Controls.Add(this.chkFont);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnShowTable);
