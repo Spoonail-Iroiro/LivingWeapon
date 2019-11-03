@@ -105,7 +105,7 @@
             // 
             this.lblEnchName.AutoSize = true;
             this.lblEnchName.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblEnchName.Location = new System.Drawing.Point(212, 575);
+            this.lblEnchName.Location = new System.Drawing.Point(225, 575);
             this.lblEnchName.Name = "lblEnchName";
             this.lblEnchName.Size = new System.Drawing.Size(0, 25);
             this.lblEnchName.TabIndex = 4;
