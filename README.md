@@ -17,4 +17,4 @@ Visual Studio 2017
 MIT
 
 ## 作者
-[Spoonail](https://twitter.com/Spoonail_iroiro)
+[Spoonail](https://twitter.com/Spoonail)
