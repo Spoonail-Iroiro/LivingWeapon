@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace LivingWeapon
 {
-    class Util
+    public class Util
     {
         public static bool IsAppClosed { get; private set; }
 

@@ -53,6 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\MyExceptions.cs" />
+    <Compile Include="Business\BasicSearchResultFormatter.cs" />
+    <Compile Include="Business\SignatureSearch.cs" />
+    <Compile Include="Business\Upper15Calc.cs" />
     <Compile Include="Forms\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +74,12 @@
     </Compile>
     <Compile Include="Forms\DGVForm.Designer.cs">
       <DependentUpon>DGVForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Upper15ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Upper15ResultForm.Designer.cs">
+      <DependentUpon>Upper15ResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EvilWeaponSettingForm.cs">
       <SubType>Form</SubType>
@@ -102,7 +111,12 @@
     <Compile Include="Forms\ScrollOfNameForm.Designer.cs">
       <DependentUpon>ScrollOfNameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Forms\Upper15WeaponSelectEnchantForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Upper15WeaponSelectEnchantForm.Designer.cs">
+      <DependentUpon>Upper15WeaponSelectEnchantForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ShowEnchantInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +192,9 @@
     <EmbeddedResource Include="Forms\DGVForm.resx">
       <DependentUpon>DGVForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Upper15ResultForm.resx">
+      <DependentUpon>Upper15ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EvilWeaponSettingForm.resx">
       <DependentUpon>EvilWeaponSettingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sub\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Upper15WeaponSelectEnchantForm.resx">
+      <DependentUpon>Upper15WeaponSelectEnchantForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\FIxSignatureListForm.resx">
       <DependentUpon>FIxSignatureListForm.cs</DependentUpon>

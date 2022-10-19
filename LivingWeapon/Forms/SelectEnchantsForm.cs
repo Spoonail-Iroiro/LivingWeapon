@@ -217,7 +217,7 @@ namespace LivingWeapon
 
         private void btnUnlimit_Click(object sender, EventArgs e)
         {
-            nudPageLimit.Value = Lists.SigList.SigList.Last().Page;
+            nudPageLimit.Value = Lists.GetLastPage();
         }
 
         private void button1_Click(object sender, EventArgs e)

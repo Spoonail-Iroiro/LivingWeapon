@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace LivingWeapon
 {
-    internal class SelectedEnchants
+    public class SelectedEnchants
     {
-        internal class EnchantAndSignatures
+        public class EnchantAndSignatures
         {
             public Enchant Enchant { get; private set; }
             public List<Signature> Signatures { get; private set; }
 
-            internal EnchantAndSignatures(Enchant enchant, int pageLimit)
+            public EnchantAndSignatures(Enchant enchant, int pageLimit)
             {
                 Enchant = enchant;
 
@@ -30,20 +30,20 @@ namespace LivingWeapon
         //...
         //SSCLは初期状態で0,0,0...なので選択されたエンチャントそれぞれについて一番強度の高いエンチャント銘を拾う
         //そのエンチャント銘セットの探索で解がなければ1,0,0…それでもなければ1,1,0…とエンチャント強度を妥協していく
-        internal List<EnchantAndSignatures> ManageList { get; private set; }
+        public List<EnchantAndSignatures> ManageList { get; private set; }
         public List<int> SignatureSearchCountList { get; private set; }
 
-        internal SelectedEnchants()
+        public SelectedEnchants()
         {
             ManageList = new List<EnchantAndSignatures>();
             SignatureSearchCountList = new List<int>();
         }
 
-        internal bool Add(Enchant enchant, int pageLimit)
+        public bool Add(Enchant enchant, int pageLimit)
         {
             var enchSig = new EnchantAndSignatures(enchant, pageLimit);
 
-            if(enchSig.Signatures.Count == 0)
+            if (enchSig.Signatures.Count == 0)
             {
                 return false;
             }
@@ -60,7 +60,7 @@ namespace LivingWeapon
         /// <remarks>
         /// 管理リスト中のエンチャントの中から1つ選んでエンチャント銘を1つ格下のものにする
         /// </remarks>
-        internal void Next()
+        public void Next()
         {
             var min = SignatureSearchCountList.Min();
 
@@ -68,8 +68,8 @@ namespace LivingWeapon
 
             SignatureSearchCountList[minIndex] += 1;
         }
-        
-        internal List<Signature> GetEnchantingSignatureList()
+
+        public List<Signature> GetEnchantingSignatureList()
         {
             //TODO OutOfRangeExceptionで探索全失敗
             var sigs = ManageList.Select((EnchSig, idx) => EnchSig.Signatures[SignatureSearchCountList[idx]]).ToList();
@@ -81,7 +81,7 @@ namespace LivingWeapon
         /// SignatureSearchCountListがすべて0（すべてのエンチャントで強度1位）のエンチャント銘セットを返します
         /// </summary>
         /// <returns></returns>
-        internal List<Signature> GetIdealEnchantingSignatureList()
+        public List<Signature> GetIdealEnchantingSignatureList()
         {
             var temp = SignatureSearchCountList;
 
@@ -94,9 +94,9 @@ namespace LivingWeapon
 
             return rtn;
         }
-        
+
         //index番目のエンチャントについて、強度valueRank（0オリジン）目のエンチャント銘を返す
-        internal Signature GetEnchantingSignature(int index, int valueRank)
+        public Signature GetEnchantingSignature(int index, int valueRank)
         {
             var selectedEnchantingSignature = ManageList[index].Signatures[valueRank];
 
@@ -105,23 +105,32 @@ namespace LivingWeapon
         }
 
         //index番目のエンチャントについて、GetEnchantingSignatureListで返すvalueRankをセットする
-        internal void SetValueRank(int index, int valueRank)
+        public void SetValueRank(int index, int valueRank)
         {
             SignatureSearchCountList[index] = valueRank;
         }
     }
 
-    internal class SearchingEnchant
+    //SearchingEnchantで3つor8つの候補の中からどの基準で選んで返すか
+    public enum SearchingEnchantModes
     {
-        internal Signature EnchantingSignature { get;  private set;}
+        LessBloodLevel, //血吸レベルが最小
+        Top             //上の選択肢（つまり[a]か[b]）
+    }
+
+    public class SearchingEnchant
+    {
+        public Signature EnchantingSignature { get; private set; }
         //育成開始レベル
-        internal int MinLevel { get; private set; }
+        public int MinLevel { get; private set; }
         //最期のレベルアップの前レベル（育成後レベル-1）
-        internal int MaxLevel { get; private set; }
+        public int MaxLevel { get; private set; }
 
-        internal List<Signature> ChoiceSignatures { get; private set; }
+        public List<Signature> ChoiceSignatures { get; private set; }
 
-        internal SearchingEnchant(int startLevel, int goalLevel, Signature enchantingSignature)
+        public SearchingEnchantModes _mode = SearchingEnchantModes.LessBloodLevel;
+
+        public SearchingEnchant(int startLevel, int goalLevel, Signature enchantingSignature, SearchingEnchantModes mode = SearchingEnchantModes.LessBloodLevel)
         {
             EnchantingSignature = enchantingSignature;
             MinLevel = startLevel;
@@ -130,7 +139,7 @@ namespace LivingWeapon
             ChoiceSignatures = new List<Signature>();
 
             //MinLevel～MaxLevelの各レベルについて、エンチャント銘のエンチャントに対応する選択エンチャントを決定する
-            for(var i = 0; i<(goalLevel - MinLevel); ++i)
+            for (var i = 0; i < (goalLevel - MinLevel); ++i)
             {
                 var level = MinLevel + i;
 
@@ -140,7 +149,7 @@ namespace LivingWeapon
 
                 var choices = new List<Signature>();
 
-                if(Lists.SelectedVersion == Version.OO)
+                if (Lists.SelectedVersion == Version.OO)
                 {
                     choices.Add(Lists.SigList.GetSignature(gappedSigNo));
                     choices.Add(Lists.SigList.GetSignature(gappedSigNo - 1));
@@ -158,22 +167,39 @@ namespace LivingWeapon
                     choices.Add(Lists.SigList.GetSignature(gappedSigNo - 2));
                 }
 
-
                 //選択不可銘を除外
                 choices.RemoveAll(sig => !sig.Selectable);
 
-                //選択候補銘の中で最も高い血吸いレベル
-                var maxBlood = choices.Max(sig => sig.BloodLevel);
+                var choice = GetAppropriateSignatureFromChoices(choices);
 
-                var choice = choices.First(sig => sig.BloodLevel == maxBlood);
 
                 ChoiceSignatures.Add(choice);
             }
         }
 
-        internal Signature GetChoiceSignature(int level)
+        Signature GetAppropriateSignatureFromChoices(List<Signature> choices)
         {
-            if (!(MinLevel <= level && level <= MaxLevel) ) return null;
+            switch (_mode)
+            {
+                case SearchingEnchantModes.LessBloodLevel:
+                    //選択候補銘の中で最も高い血吸いレベル
+                    var maxBlood = choices.Max(sig => sig.BloodLevel);
+
+                    var choice = choices.First(sig => sig.BloodLevel == maxBlood);
+                    return choice;
+                    break;
+                case SearchingEnchantModes.Top:
+                    return choices.First();
+                    break;
+                default:
+                    throw new Exception($"想定しないモードです{_mode}");
+                    break;
+            }
+        }
+
+        public Signature GetChoiceSignature(int level)
+        {
+            if (!(MinLevel <= level && level <= MaxLevel)) return null;
 
             return ChoiceSignatures[level - MinLevel];
         }

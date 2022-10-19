@@ -17,7 +17,7 @@ namespace LivingWeapon
             InitializeComponent();
         }
 
-        internal ShowEnchantInfoForm(List<Signature> enchSigIdeal, List<Signature> enchSigReal, int retryN):this()
+        public ShowEnchantInfoForm(List<Signature> enchSigIdeal, List<Signature> enchSigReal, int retryN):this()
         {
             SetDGV(dgvIdeal);
             SetDGV(dgvReal);

@@ -11,27 +11,27 @@ using LivingWeapon.MyExt;
 
 namespace LivingWeapon
 {
-    enum Version
+    public enum Version
     {
         Ver116fix2b,
         Ver122,
         OO
     }
 
-    enum WeaponType
+    public enum WeaponType
     {
         Melee,
         Ranged
     }
 
-    enum Option
+    public enum Option
     {
         Feat,
         NoFeat,
         Feat100000p
     }
 
-    static class Lists
+    public static class Lists
     {
         public static SignatureList SigList { get; set; }
         public static EnchantTypeList ETList { get; set; }
@@ -109,6 +109,20 @@ namespace LivingWeapon
             return GetEnchantListSignature(SelectedVersion, SelectedWType, SelectedOption);
         }
 
+        /// <summary>
+        /// 現在読み込んでいる銘リストの最後のページ数を返します
+        /// </summary>
+        /// <returns></returns>
+        public static int GetLastPage()
+        {
+            //ここでoo100000p意外と分岐
+            if (SelectedOption == Option.Feat100000p)
+            {
+                return 100000;
+            }
+
+            return SigList.SigList.Last().Page;
+        }
         public static int GetNoFromID(int id)
         {
             return id - 50500;
@@ -124,7 +138,7 @@ namespace LivingWeapon
     }
 
     //検索高速化のため静的に保存するデータ（jsonファイル）関連のクラス
-    static class StaticJson
+    public static class StaticJson
     {
         //値の保存用jsonパスを返します
         public static String GetJsonPath(String key)
@@ -150,7 +164,7 @@ namespace LivingWeapon
                     return obj;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new StaticJsonLoadException("JSONのロード中にエラーが発生しました", ex);
             }
@@ -171,7 +185,7 @@ namespace LivingWeapon
                     fs.Write(json);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new StaticJsonLoadException("JSONのセーブ中にエラーが発生しました", ex);
 
@@ -180,7 +194,7 @@ namespace LivingWeapon
     }
 
     //銘リスト
-    class SignatureList
+    public class SignatureList
     {
         public List<Signature> SigList { get; set; }
 
@@ -204,7 +218,7 @@ namespace LivingWeapon
                     wholeText = fs.ReadToEnd();
                 }
             }
-            catch(System.IO.FileNotFoundException ex)
+            catch (System.IO.FileNotFoundException ex)
             {
                 throw new SignatureListLoadException("", ex);
             }
@@ -239,7 +253,7 @@ namespace LivingWeapon
             }).ToList();
 
             return sigList;
-        } 
+        }
 
         //Noベースで銘を取得
         public Signature GetSignature(int no)
@@ -290,7 +304,7 @@ namespace LivingWeapon
         /// <returns></returns>
         public IEnumerable<Signature> SearchByEnchant(Enchant enchant, int pageLimit)
         {
-            if(Settings.Default.UseStaticJsonData)
+            if (Settings.Default.UseStaticJsonData)
             {
                 return Lists.MesList.SearchByEnchant(enchant, pageLimit);
             }
@@ -341,6 +355,14 @@ namespace LivingWeapon
     {
         public int No { get; set; }
         public int Page { get; set; }
+        //名前の巻物における選択肢（[a]など） 文字のみ
+        public string ChoiceLabelCharOnScrollOfName
+        {
+            get
+            {
+                return new String((char)('a' + (this.No % 17)), 1);
+            }
+        }
         public string Name { get; set; }
 
         private string _enchantStr;
@@ -393,7 +415,7 @@ namespace LivingWeapon
     }
 
     //エンチャント種類（主能力を維持する等）のリスト
-    class EnchantTypeList
+    public class EnchantTypeList
     {
         public List<EnchantType> ETList { get; set; }
 
@@ -493,7 +515,7 @@ namespace LivingWeapon
         }
     }
 
-    class EnchantType
+    public class EnchantType
     {
         public int ID { get; set; }
         public string TypeDiscription { get; set; }
@@ -553,7 +575,7 @@ namespace LivingWeapon
         {
             var skillList = Lists.SkList.GetSkillListOfEnchantType(this);
 
-            return  skillList != null;
+            return skillList != null;
         }
 
 
@@ -615,7 +637,7 @@ namespace LivingWeapon
 
     }
 
-    internal class SkillLists
+    public class SkillLists
     {
         /*
         //主能力
@@ -767,7 +789,7 @@ namespace LivingWeapon
 
     }
 
-    class Skill
+    public class Skill
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -775,7 +797,7 @@ namespace LivingWeapon
 
     //エンチャント スキルを伴う場合（例：筋力を維持）はエンチャント種類（主能力を維持）＋スキル（筋力）
     //それ以外（例：混乱無効）はエンチャント種類（混乱を無効にする）＋SkillLists.NonSkill
-    class Enchant
+    public class Enchant
     {
         public EnchantType Type { get; set; }
         public Skill Skill { get; set; }
@@ -883,7 +905,7 @@ namespace LivingWeapon
     }
 
     //すべてのエンチャントに対し、最強強度を持つエンチャント銘のランキングリストを持つクラス
-    internal class MaxEnchantSignatureLists
+    public class MaxEnchantSignatureLists
     {
         public List<MaxEnchantSignatures> MaxEnchantSigList { get; private set; }
 
@@ -891,7 +913,7 @@ namespace LivingWeapon
         {
             //読み込み
 
-            if(load)
+            if (load)
             {
                 var proxyList = StaticJson.Load<List<MESproxy>>("MESList");
 
@@ -928,7 +950,7 @@ namespace LivingWeapon
             StaticJson.Save<List<MESproxy>>("MESList", proxys);
         }
 
-        internal List<Signature> GetSignatureRankingList()
+        public List<Signature> GetSignatureRankingList()
         {
             throw new NotImplementedException();
         }
@@ -965,10 +987,10 @@ namespace LivingWeapon
 
     }
 
-    internal class MaxEnchantSignatures
+    public class MaxEnchantSignatures
     {
-        internal Enchant Ench { get; set; }
-        internal List<Signature> Sigs { get; set; }
+        public Enchant Ench { get; set; }
+        public List<Signature> Sigs { get; set; }
 
     }
 

@@ -35,11 +35,10 @@ namespace LivingWeapon.TestForms
 
             Refresh();
 
-            var lastPage = Lists.SigList.SigList.Last().Page;
 
             MakeMESListFramework(ench =>
             {
-                return new MaxEnchantSignatures { Ench = ench, Sigs = Lists.SigList.SearchByEnchant(ench, lastPage).ToList() };
+                return new MaxEnchantSignatures { Ench = ench, Sigs = Lists.SigList.SearchByEnchant(ench, Lists.GetLastPage()).ToList() };
             });
 
             /*
