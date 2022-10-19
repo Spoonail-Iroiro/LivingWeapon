@@ -47,11 +47,12 @@
             this.lblPageCountAll = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNameList = new System.Windows.Forms.Label();
+            this.lblAlpha = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblLastPage
             // 
-            this.lblLastPage.AutoSize = true;
+            this.lblLastPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLastPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.lblLastPage.Location = new System.Drawing.Point(74, 604);
             this.lblLastPage.Name = "lblLastPage";
@@ -72,7 +73,7 @@
             // 
             // lblGoalPage
             // 
-            this.lblGoalPage.AutoSize = true;
+            this.lblGoalPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGoalPage.Font = new System.Drawing.Font("Meiryo UI", 12F);
             this.lblGoalPage.Location = new System.Drawing.Point(74, 575);
             this.lblGoalPage.Name = "lblGoalPage";
@@ -105,7 +106,7 @@
             // 
             this.lblEnchName.AutoSize = true;
             this.lblEnchName.Font = new System.Drawing.Font("Meiryo UI", 12F);
-            this.lblEnchName.Location = new System.Drawing.Point(212, 575);
+            this.lblEnchName.Location = new System.Drawing.Point(225, 575);
             this.lblEnchName.Name = "lblEnchName";
             this.lblEnchName.Size = new System.Drawing.Size(0, 25);
             this.lblEnchName.TabIndex = 4;
@@ -232,11 +233,21 @@
             this.lblNameList.TabIndex = 0;
             this.lblNameList.Text = "label1";
             // 
+            // lblAlpha
+            // 
+            this.lblAlpha.AutoSize = true;
+            this.lblAlpha.Font = new System.Drawing.Font("Meiryo UI", 12F);
+            this.lblAlpha.Location = new System.Drawing.Point(272, 604);
+            this.lblAlpha.Name = "lblAlpha";
+            this.lblAlpha.Size = new System.Drawing.Size(0, 25);
+            this.lblAlpha.TabIndex = 13;
+            // 
             // ScrollOfNameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 653);
+            this.Controls.Add(this.lblAlpha);
             this.Controls.Add(this.lblLastPage);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblGoalPage);
@@ -285,5 +296,6 @@
         private System.Windows.Forms.Label lblEnchName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblSearchTarget;
+        private System.Windows.Forms.Label lblAlpha;
     }
 }

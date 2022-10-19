@@ -18,7 +18,7 @@ namespace LivingWeapon
             InitializeComponent();
         }
 
-        internal LvEnchantingSignatureForm(List<Signature> lvEnchantingSignature, int startLevel) : this()
+        public LvEnchantingSignatureForm(List<Signature> lvEnchantingSignature, int startLevel) : this()
         {
             SetDGV(dgvMain);
             dgvMain.AutoGenerateColumns = false;

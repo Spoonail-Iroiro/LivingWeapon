@@ -12,25 +12,25 @@ using System.IO;
 
 namespace LivingWeapon
 {
-    public partial class EvilWeaponResultForm : BaseForm
+    public partial class Upper15ResultForm: BaseForm
     {
         private Form _previousForm;
-        private EvilWeaponCalc _result;
+        private Upper15Calc _result;
         Dictionary<string, Form> _subForms;
 
         #region コンストラクタとロード
 
-        public EvilWeaponResultForm()
+        public Upper15ResultForm()
         {
             InitializeComponent();
         }
 
         //この前でgoalLevel - startLevel(付けられる個数)がselectedEnchantsの個数と合っていることを保証（Select→Confirmの間）
-        public EvilWeaponResultForm(Form previous, EvilWeaponCalc ecalc) : this()
+        public Upper15ResultForm(Form previous, Upper15Calc u15calc) : this()
         {
             _previousForm = previous;
 
-            _result = ecalc;
+            _result = u15calc;
 
             _subForms = new Dictionary<string, Form>();
 
@@ -45,7 +45,7 @@ namespace LivingWeapon
             {
                 var table = _result.GetResultTable();
 
-                var form = new DGVForm(table, false);
+                var form = new DGVForm(table, true);
 
                 form.Hide();
 

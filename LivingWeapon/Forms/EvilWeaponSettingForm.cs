@@ -151,7 +151,7 @@ namespace LivingWeapon
 
         private string GetSigStr(Signature sig, int lv)
         {
-            var selectChar = new String((char)('a' + (sig.No % 17)), 1);
+            var selectChar = sig.ChoiceLabelCharOnScrollOfName;
 
             return "Lv{6,4},{3,5}ページ,[{0}] {4},{5},{1}(No),{2}(ID)".Args(
                 selectChar,

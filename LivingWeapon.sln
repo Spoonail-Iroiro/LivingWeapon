@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivingWeapon", "LivingWeapon\LivingWeapon.csproj", "{9F23FF2E-F8F8-4A87-9779-F2EF4FD43236}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UISandbox_LivingWeapon", "UISandbox_LivingWeapon\UISandbox_LivingWeapon.csproj", "{8141DDA8-A4EC-4E9B-A9D3-F21E75DDCBA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F23FF2E-F8F8-4A87-9779-F2EF4FD43236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F23FF2E-F8F8-4A87-9779-F2EF4FD43236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F23FF2E-F8F8-4A87-9779-F2EF4FD43236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8141DDA8-A4EC-4E9B-A9D3-F21E75DDCBA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8141DDA8-A4EC-4E9B-A9D3-F21E75DDCBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8141DDA8-A4EC-4E9B-A9D3-F21E75DDCBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8141DDA8-A4EC-4E9B-A9D3-F21E75DDCBA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

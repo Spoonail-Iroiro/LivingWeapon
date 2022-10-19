@@ -75,7 +75,7 @@ namespace LivingWeapon
             lblGoalPage.Text = page.ToString().PadLeft(4);
         }
 
-        internal ScrollOfNameForm(Signature sig) : this()
+        public ScrollOfNameForm(Signature sig) : this()
         {
             _targetPage = sig.Page;
 
@@ -84,6 +84,8 @@ namespace LivingWeapon
             lblGoalPage.Text = sig.Page.ToString().PadLeft(4);
 
             lblEnchName.Text = "『{0}』".Args(sig.Name);
+
+            lblAlpha.Text = "選択肢 [{0}]".Args(sig.ChoiceLabelCharOnScrollOfName);
 
             _goalTarget = sig;
 
@@ -166,7 +168,7 @@ namespace LivingWeapon
 
             lblLastPage.ForeColor = diff >= 0 ? SystemColors.ControlText : Color.Red;
 
-            lblLastPage.Text = diff.ToString().PadLeft(4);
+            lblLastPage.Text = diff.ToString();
 
             _llist.SetPage(PageNow);
 

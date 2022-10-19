@@ -28,12 +28,12 @@ namespace LivingWeapon
             More
         }
 
-        internal ConfirmEnchantingSignatureForm()
+        public ConfirmEnchantingSignatureForm()
         {
             InitializeComponent();
         }
 
-        internal ConfirmEnchantingSignatureForm(Form previous, int startLevel, int goalLevel, SelectedEnchants selectedEnchants)
+        public ConfirmEnchantingSignatureForm(Form previous, int startLevel, int goalLevel, SelectedEnchants selectedEnchants)
         {
             InitializeComponent();
 
@@ -184,7 +184,22 @@ namespace LivingWeapon
             var start = _startLevel;
             var goal = _goalLevel;
 
-            var form = new SignatureCombinationResultForm(this, start, goal, _selectedEnchants);
+            //探索オブジェクトを作成
+            var searched = new SignatureSearch(start, goal, _selectedEnchants);
+            try
+            {
+                //探索
+                //結果はメンバに格納される
+                searched.Search();
+            }
+            catch(SignatureSearchFailedException ssfex)
+            {
+                MessageBox.Show("条件に合致する結果はありません。別の探索条件を指定してください。");
+                return;
+            }
+
+            //結果を算出済みの探索オブジェクトを渡してフォーム生成
+            var form = new SignatureCombinationResultForm(this, searched);
 
             this.Hide();
 

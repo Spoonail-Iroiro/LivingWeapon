@@ -179,5 +179,27 @@ namespace LivingWeapon
 
             this.Show();
         }
+
+        private void btnUpper16_Click(object sender, EventArgs e)
+        {
+            var success = LoadSignatureList();
+
+            if (!success) return;
+
+            var form = new Upper15WeaponSelectEnchantForm();
+
+            this.Hide();
+
+            form.ShowDialog();
+
+            if(Util.IsAppClosed)
+            {
+                this.Close();
+                return;
+            }
+
+            this.Show();
+
+        }
     }
 }

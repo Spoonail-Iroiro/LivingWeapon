@@ -37,7 +37,7 @@ namespace LivingWeapon
 
         }
 
-        internal Enchant GetEnchant()
+        public Enchant GetEnchant()
         {
             var enchantType = (EnchantType)cbxEnchant.SelectedValue;
 
@@ -52,7 +52,7 @@ namespace LivingWeapon
         }
 
         //選択されているエンチャントタイプに属するエンチャントをすべて取得する
-        internal List<Enchant> GetAllEnchants()
+        public List<Enchant> GetAllEnchants()
         {
             var ench = GetEnchant();
 

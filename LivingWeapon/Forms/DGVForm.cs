@@ -88,6 +88,8 @@ namespace LivingWeapon
                 _snForm.Close();
             }
 
+            if (Util.IsAppClosed) return;
+
             e.Cancel = true;
 
             this.Hide();
@@ -95,6 +97,8 @@ namespace LivingWeapon
 
         private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
+
             if (dgvMain.Columns[e.ColumnIndex].Name == "ScrollOfName")
             {
                 var table = (DataTable)dgvMain.DataSource;
@@ -103,19 +107,34 @@ namespace LivingWeapon
 
                 var targetSig = Lists.SigList.SigList.First(sig => sig.No == no);
 
+                //起動中は前に開いていた位置を記憶
                 if (_snForm != null)
                 {
+                    var prevPos = _snForm.Location;
+
                     _snForm.Close();
+
+                    _snForm = new ScrollOfNameForm(targetSig);
+
+                    _snForm.StartPosition = FormStartPosition.Manual;
+
+                    _snForm.Location = prevPos;
+                }
+                else
+                {
+                    _snForm = new ScrollOfNameForm(targetSig);
+
+                    _snForm.StartPosition = FormStartPosition.Manual;
+
+                    var centerX = this.Left + this.Width / 2;
+
+                    _snForm.Left = centerX - _snForm.Width / 2;
+                    _snForm.Top = this.Top;
+
                 }
 
-                _snForm = new ScrollOfNameForm(targetSig);
-
-                _snForm.StartPosition = FormStartPosition.Manual;
-
-                _snForm.Left = this.Left + this.Width;
-                _snForm.Top = this.Top;
-
                 _snForm.Show();
+
 
 
             }

@@ -19,7 +19,7 @@ namespace LivingWeapon
 
         List<Tuple<Signature, Color>> _highlight;        
 
-        internal LabelList(Form parent, Label labelHead, int page = 1)
+        public LabelList(Form parent, Label labelHead, int page = 1)
         {
             _list = new List<Label>();
 
@@ -56,25 +56,25 @@ namespace LivingWeapon
 
         }
 
-        internal void AddHighlight(Signature sig, Color col)
+        public void AddHighlight(Signature sig, Color col)
         {
             _highlight.Add(new Tuple<Signature, Color>(sig, col));
             Refresh();
         }
 
-        internal void RemoveHighlight(Color col)
+        public void RemoveHighlight(Color col)
         {
             _highlight.RemoveAll(hl => hl.Item2 == col);
             Refresh();
         }
 
-        internal void RemoveHighlight()
+        public void RemoveHighlight()
         {
             _highlight.Clear();
             Refresh();
         }
 
-        internal void SetPage(int page)
+        public void SetPage(int page)
         {
             _pageNow = page;
 
