@@ -159,6 +159,7 @@
             this.btnTestForm.TabIndex = 11;
             this.btnTestForm.Text = "テスト";
             this.btnTestForm.UseVisualStyleBackColor = true;
+            this.btnTestForm.Visible = false;
             this.btnTestForm.Click += new System.EventHandler(this.btnTestForm_Click);
             // 
             // btnEvil

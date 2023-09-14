@@ -297,7 +297,7 @@ namespace LivingWeapon
         }
 
         /// <summary>
-        /// メイン処理用の検索（レベル上昇によるズレを考慮しリスト頭140のエンチャント銘は検索しない、探索するのは上位10エンチャまで）
+        /// メイン処理用の検索（レベル上昇によるズレを考慮しリスト頭160のエンチャント銘は検索しない、探索するのは上位10エンチャまで）
         /// 指定エンチャントで銘リスト（頭listSkip個を除外）をpageLimitページまでで検索し、該当するエンチャント銘の強度順（強度が同じ場合No順）にsearchTake個返します。
         /// </summary>
         /// <param name="enchant"></param>
@@ -310,7 +310,7 @@ namespace LivingWeapon
             }
             else
             {
-                var listSkip = 140;
+                var listSkip = 160;
 
                 var searchSigList = SigList.Take(17 * pageLimit - 1).Skip(listSkip);
 

@@ -26,10 +26,6 @@ namespace LivingWeapon.TestForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Lists.SelectedOption == Option.Feat100000p)
-            {
-                return;
-            }
 
             Log("計算中");
 
